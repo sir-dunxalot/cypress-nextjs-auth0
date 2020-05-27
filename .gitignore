@@ -1,0 +1,34 @@
+# Deployment
+.now
+
+# Dependencies
+node_modules/
+.next
+
+# Compiled output
+build
+
+# Tests
+cypress.env.json
+coverage
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editors and IDEs
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Misc
+.DS_Store
+
+# Keys and certs
+*.pem
+.env
+
