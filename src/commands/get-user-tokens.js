@@ -1,3 +1,6 @@
+import auth from '../utils/auth';
+import auth0 from 'auth0-js';
+
 const defaultCredentials = {
   username: Cypress.env('auth0Username'),
   password: Cypress.env('auth0Password'),

@@ -1,17 +1,20 @@
-context('getUserTokens()', () => {
+context('cy.getUserTokens()', () => {
 
   it('should return tokens', () => {
     cy.getUserTokens().then((response) => {
-      console.log(response);
+      const tokenKeys = [
+        'accessToken', 'expiresIn', 'idToken', 'scope', 'tokenType'
+      ];
 
-      expect(arr).to.have.all.keys('accessToken', 'expiresIn', 'idToken', 'scope');
+      expect(response).to.have.all.keys(...tokenKeys);
 
-      const { accessToken, expiresIn, idToken, scope } = response;
+      const { accessToken, expiresIn, idToken, scope, tokenType } = response;
 
       expect(accessToken).to.be.a('string');
       expect(idToken).to.be.a('string');
       expect(scope).to.be.a('string');
       expect(expiresIn).to.be.a('number');
+      expect(tokenType).to.equal('Bearer');
     });
   });
 

@@ -1,3 +1,5 @@
+import Iron from '@hapi/iron';
+
 Cypress.Commands.add('seal', (thingToEncrypt) => {
   return new Cypress.Promise((resolve, reject) => {
     try {
