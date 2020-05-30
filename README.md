@@ -1,3 +1,5 @@
+## Contents
+
 - [Installation](#installation)
 - [Usage](#usage)
   - [login()](#login)
@@ -53,9 +55,13 @@ Everything except `auth0Username` and `auth0Password` should match your app's ex
 
 ### Step 5: Configure Auth0
 
-**Step 5.1**: Enable the `Password` Grant Type to your Auth0 Application:
+**Step 5.1**: Go to your Auth0 Application settings and enable the `Password` Grant Type:
 
-**Step 5.2**: Set your Auth0 tenant's default directory to `Username-Password-Authentication`:
+![auth0-grant-types](https://user-images.githubusercontent.com/4495352/83317105-6fed3780-a1f8-11ea-8d86-192e7e25f84b.jpg)
+
+**Step 5.2**: Go to your Auth0 tenant's setting and set the default directory to `Username-Password-Authentication`:
+
+![auth0-defualt-directory](https://user-images.githubusercontent.com/4495352/83317130-898e7f00-a1f8-11ea-9a19-0386e06ef4fb.jpg)
 
 If you have changed the name of your default directory (i.e. your tenant's default database name), you should replace `Username-Password-Authentication` with your database's name, as it's shown in the Auth0 UI. Click on 'databases' in the sidebar of the Auth0 dashboard to view your database(s).
 
