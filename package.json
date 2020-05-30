@@ -1,6 +1,6 @@
 {
   "name": "cypress-nextjs-auth0",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Auth0 authentication in a Cypress and Next.js test suite",
   "main": "dist/cypress-nextjs-auth0.js",
   "scripts": {
