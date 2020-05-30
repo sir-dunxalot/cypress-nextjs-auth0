@@ -1,12 +1,18 @@
+- [Installation](#installation)
+- [Usage](#usage)
+  - [login()](#login)
+  - [logout()](#logout)
+  - [Security considerations](#securityconsiderations)
+
 ## Installation
 
-Step 1: Install the addon.
+### Step 1: Install the addon
 
 ```sh
 yarn add cypress-nextjs-auth0 --dev
 ```
 
-Step 2: Import the commands in your Cypress support file.
+### Step 2: Import the commands
 
 ```js
 // your-app/cypress/support/index.js
@@ -14,38 +20,17 @@ Step 2: Import the commands in your Cypress support file.
 import 'cypress-nextjs-auth0';
 ```
 
-Step 3: Configure Auth0.
+### Step 3: Create a test user
 
-1. Enable the `Password` Grant Type to your Auth0 Application
-2. Set your Auth0 tenant's default directory to `Username-Password-Authentication`
-3. Create a test user
-4. Add your cypress port URL (e.g. `http://localhost:3001`) to your Auth0 Application's 'Allowed Origins (CORS)' list
-  - Note, if you don't specify a port when you run Cypress you will need to add a port to your `cypress.json` file. For example:
+Create a user in your Auth0 app that you will use specifically for testing.
 
-```json
-{
-  "port": 3001
-}
-```
+Note, [Auth0 recommends you use seperate tenant for each environment](https://auth0.com/docs/dev-lifecycle/setting-up-env) (e.g. `development`, `testing`, `production`, etc).
 
-Step 4: Add Auth0 credentials to your `cypress.env.json` file:
+You'll need this user's email and password to complete `auth0Username` and `auth0Password` in step 4.
 
-```json
-{
-  "auth0Audience": "https://YOUR_APP.auth0.com/api/v2/",
-  "auth0Domain": "YOUR_APP.auth0.com",
-  "auth0ClientId": "YOUR_CLIENT_ID",
-  "auth0ClientSecret": "YOUR_CLIENT_SECRET",
-  "auth0CookieSecret": "YOUR_RANDOM_COOKIE_SECRET",
-  "auth0Password": "TEST_USER_PASSWORD",
-  "auth0Scope": "openid profile email",
-  "auth0SessionCookieName": "a0:session",
-  "auth0StateCookieName": "a0:state",
-  "auth0Username": "TEST_USER_EMAIL"
-}
-```
+### Step 4: Add Auth0 credentials
 
-For example:
+Add the following to your `cypress.env.json` file, replacing values with your Auth0 application's values:
 
 ```json
 {
@@ -60,17 +45,43 @@ For example:
   "auth0StateCookieName": "a0:state",
   "auth0Username": "testuser@lyft.com"
 }
+```
 
+Everything except `auth0Username` and `auth0Password` should match your app's existing Auth0 settings.
+
+`auth0Username` and `auth0Password` are the email and password of the test user you created in step 3.
+
+### Step 5: Configure Auth0
+
+*Step 5.1*: Enable the `Password` Grant Type to your Auth0 Application:
+
+*Step 5.2*: Set your Auth0 tenant's default directory to `Username-Password-Authentication`:
+
+*Step 5.3*: Add your cypress port URL (e.g. `http://localhost:3001`) to your Auth0 Application's 'Allowed Origins (CORS)' list:
+
+If you don't yet specify a port when you run Cypress you will need to add a port to your `cypress.json` file. For example:
+
+```json
+{
+  "port": 3001
+}
 ```
 
 ## Usage
 
 The following commands are now available in your test suite:
 
-- `login()`
-- `logout()`
+- [login()](#login)
+- [logout()](#logout)
 
 ### login()
+
+| Property | Type | Default value | Required? |
+|------|------|------|------|
+| `credentials` | `Object` | None | No |
+| `credentials.username` | `String` | Cypress.env('auth0Username') | No |
+| `credentials.password` | `String` | Cypress.env('auth0Password') | No |
+
 
 Call login at the start of a test. For example:
 
@@ -105,13 +116,13 @@ context('Logging in', () => {
 });
 ```
 
-You can also pass a `username` and `password` to `login()`:
+You can also pass `credentials` to `login()`:
 
 ```js
 context('Logging in', () => {
   it('should login', () => {
     cy.login({
-      username: 'anotheremail@lyft.com',
+      username: 'anothertestuser@lyft.com',
       password: 'mygreatpassword',
     }).then(() => {
 
@@ -124,7 +135,17 @@ context('Logging in', () => {
 });
 ```
 
+If you want multiple test users, it's recommended to include their credentials in `cypress.env.json` rather than in your source code.
+
 ### logout()
+
+```js
+cy.logout();
+```
+
+| Property | Type | Default value | Required? |
+|------|------|------|------|
+| `returnTo` | `String` | None | No |
 
 Call `logout()` anywhere in a test. For example:
 
@@ -165,4 +186,103 @@ context('Logging out', () => {
     });
   });
 });
+```
+
+### Security considerations
+
+#### Use seperate tenants
+
+[Auth0 recommends you use a seperate tenant for each environment](https://auth0.com/docs/dev-lifecycle/setting-up-env) (e.g. `development`, `testing`, `production`, etc). This will help mitigate the risk of creating test users.
+
+Therefore, if you don't have a dedicated tenant for your `testing` environment, it's recommended you create a new tenant and update its setting to match your `development` environment before following [the installation steps](#installation).
+
+#### Storing credentials
+
+Put test credentials in `cypress.env.json` or a similar place that you can keep out of source control.
+
+If you use `cypress.env.json`, add the file to your `.gitignore` and `.npmignore` files as follows:
+
+```sh
+# .gitignore
+
+cypress.env.json
+```
+
+## Continuous integration
+
+If you use a platform for some of all of CI, like [Travis](https://travis-ci.org/), you will need to keep any sensitive data outside your test logs.
+
+## Development
+
+To contribute to this addon, clone the repo:
+
+```sh
+git clone https://github.com/sir-dunxalot/cypress-nextjs-auth0.git
+```
+
+Install dependencies:
+
+```sh
+yarn install
+```
+
+Run the dummy app server:
+
+```
+yarn dev
+```
+
+Finally, run the test suite (while the dummy app server is running):
+
+```
+yarn test
+```
+
+You will need to add two files locally:
+
+- `cypress.env.json`
+- `cypress/dummy/.env`
+
+To populate these files you can:
+
+- Open an PR and then ask @sir-dunxalot to share test credentials
+- Use values from your own Auth0 test tenant and app (since these files are not check in to source control)
+- Create a new (free tier) tenant and application in Auth0 and set it up as documented in [the installation steps](#installation)
+
+First, add `cypress.env.json` and update values to match your Auth0 testing application, or set up a new tenant and app just for this project.
+
+```json
+// cypress.env.json
+
+{
+  "auth0Audience": "https://lyft.auth0.com/api/v2/",
+  "auth0Domain": "lyft.auth0.com",
+  "auth0ClientId": "FNfof292fnNFwveldfg9222rf",
+  "auth0ClientSecret": "FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn",
+  "auth0CookieSecret": "DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
+  "auth0Password": "mysupersecurepassword",
+  "auth0Scope": "openid profile email",
+  "auth0SessionCookieName": "a0:session",
+  "auth0StateCookieName": "a0:state",
+  "auth0Username": "testuser@lyft.com"
+}
+```
+
+Second, add `cypress/dummy/.env` and copy and paste corresponding values from your `cypress.env.json` file.
+
+```sh
+# cypress/dummy/.env
+
+AUTH0_CLIENT_SECRET='FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn'
+AUTH0_COOKIE_SECRET='DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D'
+
+NEXT_PUBLIC_AUTH0_CLIENT_ID='FNfof292fnNFwveldfg9222rf'
+NEXT_PUBLIC_AUTH0_SCOPE='openid profile email'
+NEXT_PUBLIC_AUTH0_DOMAIN='lyft.auth0.com'
+NEXT_PUBLIC_AUTH0_REDIRECT_URI='http://localhost:3000/api/login-callback'
+NEXT_PUBLIC_AUTH0_POST_LOGOUT_REDIRECT_URI='http://localhost:3000/'
+NEXT_PUBLIC_AUTH0_STORE_ID_TOKEN=true
+NEXT_PUBLIC_AUTH0_STORE_REFRESH_TOKEN=true
+NEXT_PUBLIC_AUTH0_STORE_ACCESS_TOKEN=true
+NEXT_PUBLIC_AUTH0_COOKIE_LIFETIME=604800
 ```
