@@ -37,9 +37,13 @@ You'll need this user's email and password to complete `auth0Username` and `auth
 
 ### Step 4: Add Auth0 credentials
 
-Add the following to your `cypress.env.json` file, replacing values with your Auth0 application's values:
+Add the following environment variables using [one of Cypress' supported methods](https://docs.cypress.io/guides/guides/environment-variables.html#Setting) (this code example assumes you are using a `cypress.env.json` file).
+
+Replacing values with your Auth0 application's values:
 
 ```json
+// cypress.env.json
+
 {
   "auth0Audience": "https://lyft.auth0.com/api/v2/",
   "auth0Domain": "lyft.auth0.com",
@@ -278,18 +282,22 @@ Finally, run the test suite (while the dummy app server is running):
 yarn test:ui # or yarn test:headless for no UI
 ```
 
-You will need to add two files locally:
+To run the test suites locally you will need to pass some environment variables to Next.js and Cypress...
+
+The easiest way to do this is to add the following two files (they're excluded from source control), but you can also pass their contained environment variables in another way (e.g. `export CYPRESS_auth0ClientId=FNfof292fnNFwveldfg9222rf`):
 
 - `cypress.env.json`
 - `cypress/dummy/.env`
 
-To populate these files you can:
+To get values for these environment variables you can:
 
 - Open an PR and then ask @sir-dunxalot to share test credentials
 - Use values from your own Auth0 test tenant and app (since these files are not check in to source control)
 - Create a new (free tier) tenant and application in Auth0 and set it up as documented in [the installation steps](#installation)
 
-First, add `cypress.env.json` and update values to match your Auth0 testing application, or set up a new tenant and app just for this project.
+If you use your own Auth0 tenant, notice that you need two test users (for `auth0Username` and `auth0UsernameAlt`).
+
+Here are the Cypress environment variables (e.g. in `cypress.env.json`):
 
 ```json
 // cypress.env.json
@@ -310,7 +318,7 @@ First, add `cypress.env.json` and update values to match your Auth0 testing appl
 }
 ```
 
-Second, add `cypress/dummy/.env` and copy and paste corresponding values from your `cypress.env.json` file.
+Here are the Next.js app variables (e.g. in `cypress/dummy/.env`).
 
 ```sh
 # cypress/dummy/.env
