@@ -2,8 +2,9 @@
   "name": "cypress-nextjs-auth0",
   "version": "0.0.0",
   "description": "Auth0 authentication in a Cypress and Next.js test suite",
-  "main": "src/index.js",
+  "main": "dist/cypress-nextjs-auth0.js",
   "scripts": {
+    "build": "microbundle build -i src/index.js -f cjs -o dist",
     "dev": "cd cypress/dummy && next",
     "test": "cypress open"
   },
