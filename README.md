@@ -2,7 +2,7 @@
 - [Usage](#usage)
   - [login()](#login)
   - [logout()](#logout)
-  - [Security considerations](#securityconsiderations)
+  - [Security considerations](#security-considerations)
 
 ## Installation
 
@@ -15,7 +15,7 @@ yarn add cypress-nextjs-auth0 --dev
 ### Step 2: Import the commands
 
 ```js
-// your-app/cypress/support/index.js
+// cypress/support/index.js
 
 import 'cypress-nextjs-auth0';
 ```
@@ -24,7 +24,7 @@ import 'cypress-nextjs-auth0';
 
 Create a user in your Auth0 app that you will use specifically for testing.
 
-Note, [Auth0 recommends you use seperate tenant for each environment](https://auth0.com/docs/dev-lifecycle/setting-up-env) (e.g. `development`, `testing`, `production`, etc).
+In [security considerations](#security-considerations) you will see that [Auth0 recommends you use separate tenant for each environment](https://auth0.com/docs/dev-lifecycle/setting-up-env) (e.g. `development`, `testing`, `production`, etc). Consider creating this test user in a test-specific Auth0 tenant.
 
 You'll need this user's email and password to complete `auth0Username` and `auth0Password` in step 4.
 
@@ -53,17 +53,32 @@ Everything except `auth0Username` and `auth0Password` should match your app's ex
 
 ### Step 5: Configure Auth0
 
-*Step 5.1*: Enable the `Password` Grant Type to your Auth0 Application:
+**Step 5.1**: Enable the `Password` Grant Type to your Auth0 Application:
 
-*Step 5.2*: Set your Auth0 tenant's default directory to `Username-Password-Authentication`:
+**Step 5.2**: Set your Auth0 tenant's default directory to `Username-Password-Authentication`:
 
-*Step 5.3*: Add your cypress port URL (e.g. `http://localhost:3001`) to your Auth0 Application's 'Allowed Origins (CORS)' list:
+If you have changed the name of your default directory (i.e. your tenant's default database name), you should replace `Username-Password-Authentication` with your database's name, as it's shown in the Auth0 UI. Click on 'databases' in the sidebar of the Auth0 dashboard to view your database(s).
+
+**Step 5.3**: Add your cypress port URL (e.g. `http://localhost:3001`) to your Auth0 Application's 'Allowed Origins (CORS)' list:
 
 If you don't yet specify a port when you run Cypress you will need to add a port to your `cypress.json` file. For example:
 
 ```json
+// cypress.json
+
 {
   "port": 3001
+}
+```
+
+Sometimes user report needing to add disable `chromeWebSecurity` in Cypress too:
+
+```json
+// cypress.json
+
+{
+  "port": 3001,
+  "chromeWebSecurity": false
 }
 ```
 
@@ -79,8 +94,8 @@ The following commands are now available in your test suite:
 | Property | Type | Default value | Required? |
 |------|------|------|------|
 | `credentials` | `Object` | None | No |
-| `credentials.username` | `String` | Cypress.env('auth0Username') | No |
-| `credentials.password` | `String` | Cypress.env('auth0Password') | No |
+| &nbsp;&nbsp;&nbsp;&nbsp;`credentials.username` | `String` | `Cypress.env('auth0Username')` | No |
+| &nbsp;&nbsp;&nbsp;&nbsp;`credentials.password` | `String` | `Cypress.env('auth0Password')` | No |
 
 
 Call login at the start of a test. For example:
@@ -165,7 +180,7 @@ context('Logging out', () => {
       cy.request('/api/me', {
         failOnStatusCode: false,
       }).then((response) => {
-        expect(response.status).to.equal(401);
+        expect(response.status).to.equal(401); // Assert user is logged out
       });
     });
   });
@@ -188,11 +203,23 @@ context('Logging out', () => {
 });
 ```
 
+You may want to logout after every test:
+
+```js
+// cypress/support.index.js
+
+import 'cypress-nextjs-auth0';
+
+beforeEach(() => {
+  cy.logout();
+})
+```
+
 ### Security considerations
 
-#### Use seperate tenants
+#### Use separate tenants
 
-[Auth0 recommends you use a seperate tenant for each environment](https://auth0.com/docs/dev-lifecycle/setting-up-env) (e.g. `development`, `testing`, `production`, etc). This will help mitigate the risk of creating test users.
+[Auth0 recommends you use a separate tenant for each environment](https://auth0.com/docs/dev-lifecycle/setting-up-env) (e.g. `development`, `testing`, `production`, etc). This will help mitigate the risk of creating test users.
 
 Therefore, if you don't have a dedicated tenant for your `testing` environment, it's recommended you create a new tenant and update its setting to match your `development` environment before following [the installation steps](#installation).
 
@@ -208,7 +235,7 @@ If you use `cypress.env.json`, add the file to your `.gitignore` and `.npmignore
 cypress.env.json
 ```
 
-## Continuous integration
+#### Continuous integration
 
 If you use a platform for some of all of CI, like [Travis](https://travis-ci.org/), you will need to keep any sensitive data outside your test logs.
 
@@ -228,13 +255,13 @@ yarn install
 
 Run the dummy app server:
 
-```
+```sh
 yarn dev
 ```
 
 Finally, run the test suite (while the dummy app server is running):
 
-```
+```sh
 yarn test
 ```
 
@@ -285,4 +312,10 @@ NEXT_PUBLIC_AUTH0_STORE_ID_TOKEN=true
 NEXT_PUBLIC_AUTH0_STORE_REFRESH_TOKEN=true
 NEXT_PUBLIC_AUTH0_STORE_ACCESS_TOKEN=true
 NEXT_PUBLIC_AUTH0_COOKIE_LIFETIME=604800
+```
+
+Project collaborators will build the project before releasing it:
+
+```sh
+yarn build
 ```
