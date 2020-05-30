@@ -1,0 +1,34 @@
+## our React TodoMVC app is written
+## in node so thats what we select.
+## Cypress is agnostic to your apps
+## backend language though.
+language: node_js
+
+node_js:
+  - 10.8
+
+addons:
+  apt:
+    packages:
+      # Ubuntu 16+ does not install this dependency by default, so we need to install it ourselves
+      - libgconf-2-4
+
+## Cache NPM folder and Cypress binary
+## to avoid downloading Cypress again and again
+cache:
+  npm: true
+  yarn: true
+  override:
+    - yarn install --frozen-lockfile
+    - yarn cy:verify
+    - yarn cy:info
+
+install:
+  # use the new "ci" command for fastest installs on CI
+  - npm ci
+
+before_script:
+  - yarn dev & # & runs process in the background
+
+script:
+  - yarn test:headless

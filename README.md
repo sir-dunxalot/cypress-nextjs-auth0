@@ -1,3 +1,7 @@
+# cypress-nextjs-auth0
+
+[![Build Status](https://travis-ci.org/sir-dunxalot/cypress-nextjs-auth0.svg)](https://travis-ci.org/sir-dunxalot/cypress-nextjs-auth0) [![npm](https://img.shields.io/npm/v/cypress-nextjs-auth0.svg)](https://www.npmjs.com/package/cypress-nextjs-auth0)
+
 ## Contents
 
 - [Installation](#installation)
@@ -5,6 +9,7 @@
   - [login()](#login)
   - [logout()](#logout)
   - [Security considerations](#security-considerations)
+- [Contributing](#contributing)
 
 ## Installation
 
@@ -61,7 +66,7 @@ Everything except `auth0Username` and `auth0Password` should match your app's ex
 
 **Step 5.2**: Go to your Auth0 tenant's setting and set the default directory to `Username-Password-Authentication`:
 
-![auth0-defualt-directory](https://user-images.githubusercontent.com/4495352/83317130-898e7f00-a1f8-11ea-9a19-0386e06ef4fb.jpg)
+![auth0-default-directory](https://user-images.githubusercontent.com/4495352/83317130-898e7f00-a1f8-11ea-9a19-0386e06ef4fb.jpg)
 
 If you have changed the name of your default directory (i.e. your tenant's default database name), you should replace `Username-Password-Authentication` with your database's name, as it's shown in the Auth0 UI. Click on 'databases' in the sidebar of the Auth0 dashboard to view your database(s).
 
@@ -245,7 +250,9 @@ cypress.env.json
 
 If you use a platform for some of all of CI, like [Travis](https://travis-ci.org/), you will need to keep any sensitive data outside your test logs.
 
-## Development
+For [more info on how to prevent 'leaky' Travis logs, see here](https://docs.travis-ci.com/user/best-practices-security/).
+
+## Contributing
 
 To contribute to this addon, clone the repo:
 
@@ -268,7 +275,7 @@ yarn dev
 Finally, run the test suite (while the dummy app server is running):
 
 ```sh
-yarn test
+yarn test:ui # or yarn test:headless for no UI
 ```
 
 You will need to add two files locally:
@@ -294,10 +301,12 @@ First, add `cypress.env.json` and update values to match your Auth0 testing appl
   "auth0ClientSecret": "FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn",
   "auth0CookieSecret": "DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
   "auth0Password": "mysupersecurepassword",
+  "auth0PasswordAlt": "anothersupersecurepassword",
   "auth0Scope": "openid profile email",
   "auth0SessionCookieName": "a0:session",
   "auth0StateCookieName": "a0:state",
-  "auth0Username": "testuser@lyft.com"
+  "auth0Username": "testuser@lyft.com",
+  "auth0UsernameAlt": "testuser@lyft.com"
 }
 ```
 
@@ -319,6 +328,8 @@ NEXT_PUBLIC_AUTH0_STORE_REFRESH_TOKEN=true
 NEXT_PUBLIC_AUTH0_STORE_ACCESS_TOKEN=true
 NEXT_PUBLIC_AUTH0_COOKIE_LIFETIME=604800
 ```
+
+When you open a PR or push to a branch of this repo, Travis will run tests. You don't need to worry about adding environment variables since they've been added as [Travis environment variables](https://docs.travis-ci.com/user/environment-variables/) already.
 
 Project collaborators will build the project before releasing it:
 
