@@ -18,14 +18,12 @@ addons:
 cache:
   npm: true
   yarn: true
+  directories:
+    - ~/.cache
   override:
     - yarn install --frozen-lockfile
     - yarn cy:verify
     - yarn cy:info
-
-install:
-  # use the new "ci" command for fastest installs on CI
-  - npm ci
 
 before_script:
   - yarn dev & # & runs process in the background
