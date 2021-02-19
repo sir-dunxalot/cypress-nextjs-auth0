@@ -15,6 +15,7 @@ build
 cypress.env.json
 coverage
 cypress/dummy/.env
+cypress/videos
 
 # Logs
 npm-debug.log*
