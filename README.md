@@ -68,7 +68,7 @@ Everything except `auth0Username` and `auth0Password` should match your app's ex
 
 ![auth0-grant-types](https://user-images.githubusercontent.com/4495352/83317105-6fed3780-a1f8-11ea-8d86-192e7e25f84b.jpg)
 
-**Step 5.2**: Go to your Auth0 tenant's setting and set the default directory to `Username-Password-Authentication`:
+**Step 5.2**: Go to your [Auth0 tenant's settings](https://manage.auth0.com/#/tenant) (make sure tenant name is correct in top-left of the page) and set the default directory to `Username-Password-Authentication`:
 
 ![auth0-default-directory](https://user-images.githubusercontent.com/4495352/83317130-898e7f00-a1f8-11ea-9a19-0386e06ef4fb.jpg)
 
