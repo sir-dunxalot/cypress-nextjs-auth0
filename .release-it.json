@@ -1,6 +1,7 @@
 {
   "github": {
-    "release": true
+    "release": true,
+    "skipChecks": true
   },
   "npm": {
     "publish": true,
