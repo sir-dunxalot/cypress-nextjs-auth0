@@ -10,7 +10,8 @@
     "test:ui": "cypress open",
     "test:headless": "cypress run",
     "cy:verify": "cypress verify",
-    "cy:info": "cypress info"
+    "cy:info": "cypress info",
+    "release": "release-it"
   },
   "author": "",
   "license": "MIT",

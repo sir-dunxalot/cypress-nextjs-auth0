@@ -339,8 +339,16 @@ NEXT_PUBLIC_AUTH0_COOKIE_LIFETIME=604800
 
 When you open a PR or push to a branch of this repo, Travis will run tests. You don't need to worry about adding environment variables since they've been added as [Travis environment variables](https://docs.travis-ci.com/user/environment-variables/) already.
 
-Project collaborators will build the project before releasing it:
+
+## Releasing
+
+Project collaborators will build the project and release it using the `yarn release` command, which passes any params to [the release-it package](https://github.com/release-it/release-it/).
+
+For example:
 
 ```sh
-yarn build
+yarn release patch # e.g. 1.0.0 --> 1.0.1
+yarn release minor # e.g. 1.0.0 --> 1.1.0
+yarn release major # e.g. 1.0.0 --> 2.0.0
+yarn release 1.2.4 # e.g. 1.0.0 --> 1.2.4
 ```
