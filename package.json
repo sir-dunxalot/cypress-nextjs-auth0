@@ -5,6 +5,9 @@
   "source": "src/index.js",
   "main": "dist/cypress-nextjs-auth0.js",
   "types": "types/index.d.ts",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "microbundle build -f cjs",
     "dev": "cd cypress/dummy && next",
