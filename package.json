@@ -4,7 +4,7 @@
   "description": "Cypress commands to support Auth0 and Next.js.",
   "source": "src/index.js",
   "main": "dist/cypress-nextjs-auth0.js",
-  "types": "dist/index.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "build": "microbundle build -f cjs",
     "dev": "cd cypress/dummy && next",

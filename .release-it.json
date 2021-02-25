@@ -9,8 +9,7 @@
   },
   "hooks": {
     "before:init": [
-      "yarn build",
-      // "git update-index -q --refresh"
+      "yarn build"
     ]
   }
 }
