@@ -1,4 +1,11 @@
 {
+  "github": {
+    "release": true
+  },
+  "npm": {
+    "publish": true,
+    "skipChecks": true
+  },
   "hooks": {
     "before:init": [
       "yarn build",
