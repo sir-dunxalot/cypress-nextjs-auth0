@@ -1,15 +1,15 @@
 import React from 'react';
-import { useFetchUser } from '../utils/user';
+import { useUser } from '@auth0/nextjs-auth0';
 
 const Page = (props) => {
-  const { loading, user } = useFetchUser();
+  const { user } = useUser();
 
   return (
     <div>
       {user ? (
-        <a href="/api/logout">Logout</a>
+        <a href="/api/auth/logout">Logout</a>
       ) : (
-        <a href="/api/login">Login</a>
+        <a href="/api/auth/login">Login</a>
       )}
 
       <dl>

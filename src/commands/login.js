@@ -9,7 +9,6 @@ Cypress.Commands.add('login', (credentials = {}) => {
   };
 
   const sessionCookieName = Cypress.env('auth0SessionCookieName');
-  const stateCookieName = Cypress.env('auth0StateCookieName');
 
   /* https://github.com/auth0/nextjs-auth0/blob/master/src/handlers/login.ts#L70 */
 
@@ -22,8 +21,6 @@ Cypress.Commands.add('login', (credentials = {}) => {
       } else {
         cy.clearCookies();
 
-        cy.setCookie(stateCookieName, 'some-random-state');
-
         cy.getUserTokens(_credentials).then((response) => {
           const { accessToken, expiresIn, idToken, scope } = response;
 
@@ -32,7 +29,8 @@ Cypress.Commands.add('login', (credentials = {}) => {
             /* https://github.com/auth0/nextjs-auth0/blob/master/src/handlers/callback.ts#L47 */
             /* https://github.com/auth0/nextjs-auth0/blob/master/src/session/cookie-store/index.ts#L57 */
 
-            const persistedSession = {
+            const payload = {
+              secret: Cypress.env('auth0CookieSecret'),
               user,
               idToken,
               accessToken,
@@ -43,9 +41,9 @@ Cypress.Commands.add('login', (credentials = {}) => {
 
             /* https://github.com/auth0/nextjs-auth0/blob/master/src/session/cookie-store/index.ts#L73 */
 
-            cy.seal(persistedSession).then((encryptedSession) => {
+            cy.task('encrypt', payload).then((encryptedSession) => {
               cy.setCookie(sessionCookieName, encryptedSession);
-            });
+            })
           });
         });
       }

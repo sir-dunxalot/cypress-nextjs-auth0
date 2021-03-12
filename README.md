@@ -27,6 +27,18 @@ yarn add cypress-nextjs-auth0 --dev
 import 'cypress-nextjs-auth0';
 ```
 
+### Step 2: Register the task
+
+```js
+// cypress/plugins/index.js
+
+const encryptTask = require('cypress-nextjs-auth0/encrypt');
+
+module.exports = (on, config) => {
+  on('task', encryptTask)
+}
+```
+
 ### Step 3: Create a test user
 
 Create a user in your Auth0 app that you will use specifically for testing.
@@ -53,7 +65,6 @@ Replacing values with your Auth0 application's values:
   "auth0Password": "mysupersecurepassword",
   "auth0Scope": "openid profile email",
   "auth0SessionCookieName": "a0:session",
-  "auth0StateCookieName": "a0:state",
   "auth0Username": "testuser@lyft.com"
 }
 ```
@@ -312,7 +323,6 @@ Here are the Cypress environment variables (e.g. in `cypress.env.json`):
   "auth0PasswordAlt": "anothersupersecurepassword",
   "auth0Scope": "openid profile email",
   "auth0SessionCookieName": "a0:session",
-  "auth0StateCookieName": "a0:state",
   "auth0Username": "testuser@lyft.com",
   "auth0UsernameAlt": "testuser@lyft.com"
 }

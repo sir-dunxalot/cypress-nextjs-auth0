@@ -12,7 +12,7 @@ context('cy.login()', () => {
 
   it('should login and authenticate an API call', () => {
     cy.login().then(() => {
-      cy.request('http://localhost:3000/api/me').then(({ body: user }) => {
+      cy.request('http://localhost:3000/api/auth/me').then(({ body: user }) => {
         expect(user).to.have.property('sub');
         expect(user).to.have.property('email');
 
@@ -59,7 +59,7 @@ context('cy.login()', () => {
 
   it('should login with alternative credentials', () => {
     cy.login(credentialsAlt).then(() => {
-      cy.request('http://localhost:3000/api/me').then(({ body: user }) => {
+      cy.request('http://localhost:3000/api/auth/me').then(({ body: user }) => {
         expect(user).to.have.property('sub');
         expect(user).to.have.property('email');
 
