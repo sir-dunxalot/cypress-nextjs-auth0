@@ -64,7 +64,7 @@ Replacing values with your Auth0 application's values:
   "auth0CookieSecret": "DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
   "auth0Password": "mysupersecurepassword",
   "auth0Scope": "openid profile email",
-  "auth0SessionCookieName": "a0:session",
+  "auth0SessionCookieName": "appSession",
   "auth0Username": "testuser@lyft.com"
 }
 ```
@@ -322,7 +322,7 @@ Here are the Cypress environment variables (e.g. in `cypress.env.json`):
   "auth0Password": "mysupersecurepassword",
   "auth0PasswordAlt": "anothersupersecurepassword",
   "auth0Scope": "openid profile email",
-  "auth0SessionCookieName": "a0:session",
+  "auth0SessionCookieName": "appSession",
   "auth0Username": "testuser@lyft.com",
   "auth0UsernameAlt": "testuser@lyft.com"
 }
@@ -334,17 +334,13 @@ Here are the Next.js app variables (e.g. in `cypress/dummy/.env`).
 # cypress/dummy/.env
 
 AUTH0_CLIENT_SECRET='FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn'
-AUTH0_COOKIE_SECRET='DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D'
+AUTH0_SECRET='DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D'
 
-NEXT_PUBLIC_AUTH0_CLIENT_ID='FNfof292fnNFwveldfg9222rf'
-NEXT_PUBLIC_AUTH0_SCOPE='openid profile email'
-NEXT_PUBLIC_AUTH0_DOMAIN='lyft.auth0.com'
-NEXT_PUBLIC_AUTH0_REDIRECT_URI='http://localhost:3000/api/login-callback'
-NEXT_PUBLIC_AUTH0_POST_LOGOUT_REDIRECT_URI='http://localhost:3000/'
-NEXT_PUBLIC_AUTH0_STORE_ID_TOKEN=true
-NEXT_PUBLIC_AUTH0_STORE_REFRESH_TOKEN=true
-NEXT_PUBLIC_AUTH0_STORE_ACCESS_TOKEN=true
-NEXT_PUBLIC_AUTH0_COOKIE_LIFETIME=604800
+AUTH0_CLIENT_ID='FNfof292fnNFwveldfg9222rf'
+AUTH0_AUDIENCE='https://lyft.auth0.com/api/v2/'
+AUTH0_SCOPE='openid profile email'
+AUTH0_ISSUER_BASE_URL='https://lyft.auth0.com'
+AUTH0_BASE_URL='http://localhost:3000'
 ```
 
 When you open a PR or push to a branch of this repo, Travis will run tests. You don't need to worry about adding environment variables since they've been added as [Travis environment variables](https://docs.travis-ci.com/user/environment-variables/) already.
