@@ -1,5 +1,5 @@
-const encryptTask = require('../../encrypt');
+const encrypt = require('../../encrypt');
 
 module.exports = (on, config) => {
-  on('task', encryptTask)
+  on('task', { encrypt });
 }
