@@ -11,6 +11,6 @@ Cypress.Commands.add('logout', (returnTo) => {
 
   const logoutUrl = auth.client.buildLogoutUrl(options);
 
-  cy.request('/api/logout');
+  cy.request('/api/auth/logout');
   cy.reload();
 });
