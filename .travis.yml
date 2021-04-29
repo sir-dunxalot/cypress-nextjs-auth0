@@ -20,12 +20,9 @@ cache:
   yarn: true
   directories:
     - ~/.cache
-  override:
-    - yarn install --frozen-lockfile
-    - yarn cy:verify
-    - yarn cy:info
 
 before_script:
+  - yarn cy:verify
   - yarn dev & # & runs process in the background
 
 script:
