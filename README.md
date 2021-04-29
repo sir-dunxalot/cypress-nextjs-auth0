@@ -5,6 +5,7 @@
 ## Contents
 
 - [Installation](#installation)
+  - [Installation troubleshooting](#installation-troubleshooting)
 - [Usage](#usage)
   - [login()](#login)
   - [logout()](#logout)
@@ -27,19 +28,19 @@ yarn add cypress-nextjs-auth0 --dev
 import 'cypress-nextjs-auth0';
 ```
 
-### Step 2: Register the task
+### Step 3: Register the task
 
 ```js
 // cypress/plugins/index.js
 
-const encryptTask = require('cypress-nextjs-auth0/encrypt');
+const encrypt = require('cypress-nextjs-auth0/encrypt');
 
 module.exports = (on, config) => {
-  on('task', encryptTask)
+  on('task', { encrypt });
 }
 ```
 
-### Step 3: Create a test user
+### Step 4: Create a test user
 
 Create a user in your Auth0 app that you will use specifically for testing.
 
@@ -47,7 +48,7 @@ In [security considerations](#security-considerations) you will see that [Auth0 
 
 You'll need this user's email and password to complete `auth0Username` and `auth0Password` in step 4.
 
-### Step 4: Add Auth0 credentials
+### Step 5: Add Auth0 credentials
 
 Add the following environment variables using [one of Cypress' supported methods](https://docs.cypress.io/guides/guides/environment-variables.html#Setting) (this code example assumes you are using a `cypress.env.json` file).
 
@@ -73,19 +74,19 @@ Everything except `auth0Username` and `auth0Password` should match your app's ex
 
 `auth0Username` and `auth0Password` are the email and password of the test user you created in step 3.
 
-### Step 5: Configure Auth0
+### Step 6: Configure Auth0
 
-**Step 5.1**: Go to your Auth0 Application settings and enable the `Password` Grant Type:
+**Step 6.1**: Go to your Auth0 Application settings and enable the `Password` Grant Type:
 
 ![auth0-grant-types](https://user-images.githubusercontent.com/4495352/83317105-6fed3780-a1f8-11ea-8d86-192e7e25f84b.jpg)
 
-**Step 5.2**: Go to your [Auth0 tenant's settings](https://manage.auth0.com/#/tenant) (make sure tenant name is correct in top-left of the page) and set the default directory to `Username-Password-Authentication`:
+**Step 6.2**: Go to your [Auth0 tenant's settings](https://manage.auth0.com/#/tenant) (make sure tenant name is correct in top-left of the page) and set the default directory to `Username-Password-Authentication`:
 
 ![auth0-default-directory](https://user-images.githubusercontent.com/4495352/83317130-898e7f00-a1f8-11ea-9a19-0386e06ef4fb.jpg)
 
 If you have changed the name of your default directory (i.e. your tenant's default database name), you should replace `Username-Password-Authentication` with your database's name, as it's shown in the Auth0 UI. Click on 'databases' in the sidebar of the Auth0 dashboard to view your database(s).
 
-**Step 5.3**: Add your cypress port URL (e.g. `http://localhost:3001`) to your Auth0 Application's 'Allowed Origins (CORS)' list:
+**Step 6.3**: Add your cypress port URL (e.g. `http://localhost:3001`) to your Auth0 Application's 'Allowed Origins (CORS)' list:
 
 If you don't yet specify a port when you run Cypress you will need to add a port to your `cypress.json` file. For example:
 
@@ -97,7 +98,15 @@ If you don't yet specify a port when you run Cypress you will need to add a port
 }
 ```
 
-Sometimes user report needing to add disable `chromeWebSecurity` in Cypress too:
+### Installation troubleshooting
+
+Make sure you have authorized the `@auth0/nextjs-auth0` callback in your tenant settings `Allowed Callback URLs` field:
+
+```
+http://localhost:3000/api/auth/callback
+```
+
+Some developers report needing to disable `chromeWebSecurity` in Cypress:
 
 ```json
 // cypress.json
