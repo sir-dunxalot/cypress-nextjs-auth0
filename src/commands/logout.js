@@ -1,16 +1,15 @@
 import auth from '../utils/auth';
 
-Cypress.Commands.add('logout', (returnTo) => {
-  const options = {
+Cypress.Commands.add('logout', (options = {}) => {
+  const { returnTo, logoutUrl } = options;
+
+  const builtLogoutUrl = auth.client.buildLogoutUrl({
     clientID: Cypress.env('auth0ClientId'),
-  };
+    returnTo: returnTo,
+  });
 
-  if (returnTo) {
-    options.returnTo = returnTo;
-  }
+  cy.request(builtLogoutUrl);
+  cy.request(logoutUrl || '/api/auth/logout');
 
-  const logoutUrl = auth.client.buildLogoutUrl(options);
-
-  cy.request('/api/auth/logout');
   cy.reload();
 });

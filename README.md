@@ -132,11 +132,11 @@ The following commands are now available in your test suite:
 
 ### login()
 
-| Property | Type | Default value | Required? |
-|------|------|------|------|
-| `credentials` | `Object` | None | No |
-| &nbsp;&nbsp;&nbsp;&nbsp;`credentials.username` | `String` | `Cypress.env('auth0Username')` | No |
-| &nbsp;&nbsp;&nbsp;&nbsp;`credentials.password` | `String` | `Cypress.env('auth0Password')` | No |
+| Property               | Type     | Default value                  | Required? |
+| ---------------------- | -------- | ------------------------------ | --------- |
+| `credentials`          | `Object` | None                           | No        |
+| `credentials.username` | `String` | `Cypress.env('auth0Username')` | No        |
+| `credentials.password` | `String` | `Cypress.env('auth0Password')` | No        |
 
 Call login at the start of a test. For example:
 
@@ -198,9 +198,11 @@ If you want multiple test users, it's recommended to include their credentials i
 cy.logout();
 ```
 
-| Property | Type | Default value | Required? |
-|------|------|------|------|
-| `returnTo` | `String` | None | No |
+| Property            | Type     | Default value | Required? |
+| ------------------- | -------- | ------------- | --------- |
+| `options`           | `Object` | None          | No        |
+| `options.returnTo`  | `String` | None          | No        |
+| `options.logoutUrl` | `String` | None          | No        |
 
 Call `logout()` anywhere in a test. For example:
 

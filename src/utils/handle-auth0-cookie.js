@@ -13,7 +13,7 @@ const MAX_COOKIE_SIZE = 4096;
  * At the moment we do not support customizing the cookie and
  *
  * NOTE: If necessary, enable feature (via .env) to further customize cookie options
- * @see https://github.com/auth0/nextjs-auth0/blob/7ca367a1e0e13f83cfc5d74cbc56dbb486df10a0/src/config.ts#L472
+ * @see https://github.com/auth0/nextjs-auth0/blob/7ca367a1e0e13f83cfc5d74cbc56dbb486df10a0/src/config.ts#L472-L480
  *
  * @type {import('cookie').CookieSerializeOptions}
  */
