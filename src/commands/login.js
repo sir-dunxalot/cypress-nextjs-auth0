@@ -1,3 +1,5 @@
+import { handleAuth0Cookie } from '../utils/handle-auth0-cookie';
+
 let cachedUsername;
 
 Cypress.Commands.add('login', (credentials = {}) => {
@@ -41,14 +43,14 @@ Cypress.Commands.add('login', (credentials = {}) => {
 
             /* https://github.com/auth0/nextjs-auth0/blob/master/src/session/cookie-store/index.ts#L73 */
 
-            cy.task('encrypt', payload).then((encryptedSession) => {
-              cy.setCookie(sessionCookieName, encryptedSession);
-            })
+            cy.task('encrypt', payload).then(encryptedSession => {
+              handleAuth0Cookie(encryptedSession);
+            });
           });
         });
       }
     });
-  } catch(error) {
+  } catch (error) {
     // throw new Error(error);
   }
 });
