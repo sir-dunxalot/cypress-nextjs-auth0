@@ -5,6 +5,11 @@
   "source": "src/index.js",
   "main": "dist/cypress-nextjs-auth0.js",
   "types": "types/index.d.ts",
+  "files": [
+    "dist",
+    "types",
+    "encrypt.js"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
