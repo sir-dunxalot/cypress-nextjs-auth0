@@ -1,17 +1,32 @@
 # cypress-nextjs-auth0
 
-[![Node CI](https://github.com/sir-dunxalot/cypress-nextjs-auth0/actions/workflows/ci.yml/badge.svg)](https://github.com/sir-dunxalot/cypress-nextjs-auth0/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/cypress-nextjs-auth0.svg)](https://www.npmjs.com/package/cypress-nextjs-auth0)
+[![Node CI](https://github.com/sir-dunxalot/cypress-nextjs-auth0/actions/workflows/ci.yml/badge.svg)](https://github.com/sir-dunxalot/cypress-nextjs-auth0/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/cypress-nextjs-auth0.svg)](https://www.npmjs.com/package/cypress-nextjs-auth0)
 
 ## Contents
 
-- [Compatibility](#compatibility)
-- [Installation](#installation)
-  - [Installation troubleshooting](#installation-troubleshooting)
-- [Usage](#usage)
-  - [login()](#login)
-  - [logout()](#logout)
-  - [Security considerations](#security-considerations)
-- [Contributing](#contributing)
+* [cypress-nextjs-auth0](#cypress-nextjs-auth0)
+  * [Contents](#contents)
+  * [Compatibility](#compatibility)
+  * [Installation](#installation)
+    * [Step 1: Install the addon](#step-1-install-the-addon)
+    * [Step 2: Import the commands](#step-2-import-the-commands)
+    * [Step 3: Register the task](#step-3-register-the-task)
+    * [Step 4: Create a test user](#step-4-create-a-test-user)
+    * [Step 5: Add Auth0 credentials](#step-5-add-auth0-credentials)
+    * [Step 6: Configure Auth0](#step-6-configure-auth0)
+    * [Cookie Settings](#cookie-settings)
+    * [Installation troubleshooting](#installation-troubleshooting)
+  * [Usage](#usage)
+    * [login()](#login)
+    * [logout()](#logout)
+    * [Preserving Cookies](#preserving-cookies)
+    * [Security considerations](#security-considerations)
+      * [Use separate tenants](#use-separate-tenants)
+      * [Storing credentials](#storing-credentials)
+      * [Continuous integration](#continuous-integration)
+  * [Contributing](#contributing)
+  * [Releasing](#releasing)
 
 ## Compatibility
 
