@@ -10,15 +10,23 @@ import { serialize } from 'cookie';
 const MAX_COOKIE_SIZE = 4096;
 
 /**
- * ATTENTION: At the moment we do not support customizing the cookie further!
+ * If necessary, sync again with the options defined in nextjs-auth0
  *
- * NOTE: If necessary, enable feature (via .env) to further customize cookie options
+ * based on
  * @see https://github.com/auth0/nextjs-auth0/blob/7ca367a1e0e13f83cfc5d74cbc56dbb486df10a0/src/config.ts#L472-L480
+ *
+ * Docs
+ * @see https://auth0.github.io/nextjs-auth0/interfaces/config.cookieconfig.html
  *
  * @type {import('cookie').CookieSerializeOptions}
  */
 const COOKIE_OPTIONS = {
   domain: Cypress.env('auth0CookieDomain'),
+  path: Cypress.env('auth0CookiePath'),
+  httpOnly: Cypress.env('auth0CookieHttpOnly'),
+  sameSite: Cypress.env('auth0CookieCookieSameSite'),
+  secure: Cypress.env('auth0CookieCookieSecure'),
+  transient: Cypress.env('auth0CookieTransient'),
 };
 
 const SESSION_COOKIE_NAME = Cypress.env('auth0SessionCookieName');

@@ -7,9 +7,8 @@ Cypress.Commands.add('logout', (options = {}) => {
     clientID: Cypress.env('auth0ClientId'),
     returnTo: returnTo,
   });
-
   cy.request(builtLogoutUrl);
-  cy.request(logoutUrl || '/api/auth/logout');
 
-  cy.reload();
+  // default URL is the default URL that nextjs-auth0 defines and uses
+  cy.visit(logoutUrl || '/api/auth/logout');
 });

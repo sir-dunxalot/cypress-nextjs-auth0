@@ -104,6 +104,26 @@ If you don't yet specify a port when you run Cypress you will need to add a port
 }
 ```
 
+### Cookie Settings
+
+If you have further customized your Auth0 cookie (see
+[CookieConfig](https://auth0.github.io/nextjs-auth0/interfaces/config.cookieconfig.html)),
+you have to set the following environment variables as well:
+
+```sh
+# .env
+
+AUTH0_COOKIE_PATH
+AUTH0_COOKIE_HTTP_ONLY
+AUTH0_COOKIE_SAME_SITE
+AUTH0_COOKIE_SECURE
+AUTH0_COOKIE_TRANSIENT
+```
+
+Please, take a look at the offical
+[documentation](https://auth0.github.io/nextjs-auth0/interfaces/config.cookieconfig.html)
+for more details.
+
 ### Installation troubleshooting
 
 Make sure you have authorized the `@auth0/nextjs-auth0` callback in your tenant settings `Allowed Callback URLs` field:

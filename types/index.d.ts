@@ -19,7 +19,7 @@ declare global {
       logout(options?: {
         returnTo?: string;
         /**
-         * @default "/api/auth/logout"
+         * @example "/api/auth/logout"
          */
         logoutUrl?: string;
       }): Chainable<Element>;
