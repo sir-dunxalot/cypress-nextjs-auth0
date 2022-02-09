@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "microbundle build -f cjs",
-    "dev": "cd cypress/dummy && next",
+    "dev": "next dev cypress/dummy",
     "test:ui": "cypress open",
     "test:headless": "cypress run",
     "cy:verify": "cypress verify",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@auth0/nextjs-auth0": "^1.7.0",
     "cypress": "^9.4.1",
+    "dotenv": "^16.0.0",
     "isomorphic-unfetch": "^3.1.0",
     "microbundle": "^0.14.2",
     "next": "^12.0.10",
