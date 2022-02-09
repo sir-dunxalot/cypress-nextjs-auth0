@@ -10,7 +10,7 @@ import { serialize } from 'cookie';
 const MAX_COOKIE_SIZE = 4096;
 
 /**
- * At the moment we do not support customizing the cookie and
+ * ATTENTION: At the moment we do not support customizing the cookie further!
  *
  * NOTE: If necessary, enable feature (via .env) to further customize cookie options
  * @see https://github.com/auth0/nextjs-auth0/blob/7ca367a1e0e13f83cfc5d74cbc56dbb486df10a0/src/config.ts#L472-L480
@@ -42,7 +42,7 @@ const SESSION_COOKIE_NAME = Cypress.env('auth0SessionCookieName');
  * CookieHelper is not exposed (yet):
  * @see https://github.com/auth0/nextjs-auth0/issues/335#issuecomment-799401740
  */
-export const handleAuth0Cookie = encryptedSession => {
+Cypress.Commands.add('_handleAuth0Cookie', encryptedSession => {
   const emptyCookie = serialize(`${SESSION_COOKIE_NAME}.0`, '', COOKIE_OPTIONS);
   const chunkSize = MAX_COOKIE_SIZE - emptyCookie.length;
 
@@ -63,9 +63,6 @@ export const handleAuth0Cookie = encryptedSession => {
       expiry: 0,
     });
   } else {
-    // set one main cookie because its value does not exceed the max size
-    cy.setCookie(SESSION_COOKIE_NAME, value, COOKIE_OPTIONS);
-
     // clear other SESSION_COOKIE_NAME.{i} cookies in order to have
     // only one left that is used by auth0
     // https://github.com/auth0/nextjs-auth0/blob/443171b74074eaec5b0e8db6380b05cc359e505e/src/auth0-session/cookie-store.ts#L202-L205
@@ -77,6 +74,9 @@ export const handleAuth0Cookie = encryptedSession => {
           });
         }
       });
+
+      // set one main cookie because its value does not exceed the max size
+      cy.setCookie(SESSION_COOKIE_NAME, value, COOKIE_OPTIONS);
     });
   }
-};
+});

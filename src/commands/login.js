@@ -1,5 +1,3 @@
-import { handleAuth0Cookie } from '../utils/handle-auth0-cookie';
-
 let cachedUsername;
 
 Cypress.Commands.add('login', (credentials = {}) => {
@@ -15,7 +13,7 @@ Cypress.Commands.add('login', (credentials = {}) => {
   /* https://github.com/auth0/nextjs-auth0/blob/master/src/handlers/login.ts#L70 */
 
   try {
-    cy.getCookie(sessionCookieName).then((cookieValue) => {
+    cy.getCookie(sessionCookieName).then(cookieValue => {
       /* Skip logging in again if session already exists */
 
       if (cookieValue && cachedUserIsCurrentUser) {
@@ -23,10 +21,10 @@ Cypress.Commands.add('login', (credentials = {}) => {
       } else {
         cy.clearCookies();
 
-        cy.getUserTokens(_credentials).then((response) => {
+        cy.getUserTokens(_credentials).then(response => {
           const { accessToken, expiresIn, idToken, scope } = response;
 
-          cy.getUserInfo(accessToken).then((user) => {
+          cy.getUserInfo(accessToken).then(user => {
             /* https://github.com/auth0/nextjs-auth0/blob/master/src/handlers/callback.ts#L44 */
             /* https://github.com/auth0/nextjs-auth0/blob/master/src/handlers/callback.ts#L47 */
             /* https://github.com/auth0/nextjs-auth0/blob/master/src/session/cookie-store/index.ts#L57 */
@@ -44,7 +42,7 @@ Cypress.Commands.add('login', (credentials = {}) => {
             /* https://github.com/auth0/nextjs-auth0/blob/master/src/session/cookie-store/index.ts#L73 */
 
             cy.task('encrypt', payload).then(encryptedSession => {
-              handleAuth0Cookie(encryptedSession);
+              cy._handleAuth0Cookie(encryptedSession);
             });
           });
         });
