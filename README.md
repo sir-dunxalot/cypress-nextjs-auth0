@@ -292,6 +292,10 @@ beforeEach(() => {
 })
 ```
 
+### Preserving Cookies
+
+`cypress-nextjs-auth0` automatically preserves cookies between tests.
+
 ### Security considerations
 
 #### Use separate tenants
