@@ -1,6 +1,6 @@
 # cypress-nextjs-auth0
 
-[![Build Status](https://travis-ci.org/sir-dunxalot/cypress-nextjs-auth0.svg)](https://travis-ci.org/sir-dunxalot/cypress-nextjs-auth0) [![npm](https://img.shields.io/npm/v/cypress-nextjs-auth0.svg)](https://www.npmjs.com/package/cypress-nextjs-auth0)
+[![Node CI](https://github.com/sir-dunxalot/cypress-nextjs-auth0/actions/workflows/ci.yml/badge.svg)](https://github.com/sir-dunxalot/cypress-nextjs-auth0/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/cypress-nextjs-auth0.svg)](https://www.npmjs.com/package/cypress-nextjs-auth0)
 
 ## Contents
 
@@ -138,7 +138,6 @@ The following commands are now available in your test suite:
 | &nbsp;&nbsp;&nbsp;&nbsp;`credentials.username` | `String` | `Cypress.env('auth0Username')` | No |
 | &nbsp;&nbsp;&nbsp;&nbsp;`credentials.password` | `String` | `Cypress.env('auth0Password')` | No |
 
-
 Call login at the start of a test. For example:
 
 ```js
@@ -266,21 +265,22 @@ Therefore, if you don't have a dedicated tenant for your `testing` environment, 
 
 #### Storing credentials
 
-Put test credentials in `cypress.env.json` or a similar place that you can keep out of source control.
+Put test credentials in `cypress.env.json` or a similar place (e.g. `.env`) that you can keep out of source control.
 
-If you use `cypress.env.json`, add the file to your `.gitignore` and `.npmignore` files as follows:
+If you use one of those, add the file to your `.gitignore` and `.npmignore` files as follows:
 
 ```sh
 # .gitignore
 
+.env
 cypress.env.json
 ```
 
 #### Continuous integration
 
-If you use a platform for some of all of CI, like [Travis](https://travis-ci.org/), you will need to keep any sensitive data outside your test logs.
+If you use a platform for some of all of CI, like [GitHub Actions](https://github.com/features/actions), you will need to keep any sensitive data outside your test logs.
 
-For [more info on how to prevent 'leaky' Travis logs, see here](https://docs.travis-ci.com/user/best-practices-security/).
+For [more info on how to prevent 'leaky' logs, see here](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
 
 ## Contributing
 
@@ -310,9 +310,9 @@ yarn test:ui # or yarn test:headless for no UI
 
 To run the test suites locally you will need to pass some environment variables to Next.js and Cypress...
 
-The easiest way to do this is to add the following two files (they're excluded from source control), but you can also pass their contained environment variables in another way (e.g. `export CYPRESS_auth0ClientId=FNfof292fnNFwveldfg9222rf`):
+The easiest way to do this is to add the following two files (they're excluded from source control):
 
-- `cypress.env.json`
+- `.env`
 - `cypress/dummy/.env`
 
 To get values for these environment variables you can:
@@ -321,26 +321,23 @@ To get values for these environment variables you can:
 - Use values from your own Auth0 test tenant and app (since these files are not check in to source control)
 - Create a new (free tier) tenant and application in Auth0 and set it up as documented in [the installation steps](#installation)
 
-If you use your own Auth0 tenant, notice that you need two test users (for `auth0Username` and `auth0UsernameAlt`).
+If you use your own Auth0 tenant, notice that you need two test users (for `AUTH0_USERNAME` and `AUTH0_USERNAMEALT`).
 
-Here are the Cypress environment variables (e.g. in `cypress.env.json`):
+Here are the Cypress environment variables (e.g. in `.env`):
 
-```json
-// cypress.env.json
-
-{
-  "auth0Audience": "https://lyft.auth0.com/api/v2/",
-  "auth0Domain": "lyft.auth0.com",
-  "auth0ClientId": "FNfof292fnNFwveldfg9222rf",
-  "auth0ClientSecret": "FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn",
-  "auth0CookieSecret": "DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
-  "auth0Password": "mysupersecurepassword",
-  "auth0PasswordAlt": "anothersupersecurepassword",
-  "auth0Scope": "openid profile email",
-  "auth0SessionCookieName": "appSession",
-  "auth0Username": "testuser@lyft.com",
-  "auth0UsernameAlt": "testuser@lyft.com"
-}
+```sh
+# .env
+AUTH0_AUDIENCE="https://lyft.auth0.com/api/v2/",
+AUTH0_DOMAIN="lyft.auth0.com",
+AUTH0_CLIENT_ID="FNfof292fnNFwveldfg9222rf",
+AUTH0_CLIENT_SECRET="FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn",
+AUTH0_SECRET="DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
+AUTH0_SCOPE="openid profile email",
+AUTH0_SESSION_COOKIE_NAME="appSession",
+AUTH0_USERNAME="testuser@lyft.com",
+AUTH0_PASSWORD="mysupersecurepassword",
+AUTH0_USERNAMEALT="testuser@lyft.com"
+AUTH0_PASSWORDALT="anothersupersecurepassword",
 ```
 
 Here are the Next.js app variables (e.g. in `cypress/dummy/.env`).
@@ -348,18 +345,17 @@ Here are the Next.js app variables (e.g. in `cypress/dummy/.env`).
 ```sh
 # cypress/dummy/.env
 
-AUTH0_CLIENT_SECRET='FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn'
-AUTH0_SECRET='DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D'
+AUTH0_CLIENT_SECRET="FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn"
+AUTH0_SECRET="DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D"
 
-AUTH0_CLIENT_ID='FNfof292fnNFwveldfg9222rf'
-AUTH0_AUDIENCE='https://lyft.auth0.com/api/v2/'
-AUTH0_SCOPE='openid profile email'
-AUTH0_ISSUER_BASE_URL='https://lyft.auth0.com'
-AUTH0_BASE_URL='http://localhost:3000'
+AUTH0_CLIENT_ID="FNfof292fnNFwveldfg9222rf"
+AUTH0_AUDIENCE="https://lyft.auth0.com/api/v2/"
+AUTH0_SCOPE="openid profile email"
+AUTH0_ISSUER_BASE_URL="https://lyft.auth0.com"
+AUTH0_BASE_URL="http://localhost:3000"
 ```
 
-When you open a PR or push to a branch of this repo, Travis will run tests. You don't need to worry about adding environment variables since they've been added as [Travis environment variables](https://docs.travis-ci.com/user/environment-variables/) already.
-
+When you open a PR or push to a branch of this repo, GitHub Actions will run tests. You don't need to worry about adding environment variables since they've been added as [Repository Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) already.
 
 ## Releasing
 

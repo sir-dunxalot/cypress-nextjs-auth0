@@ -1,0 +1,53 @@
+name: Node CI
+
+on:
+  # Trigger the workflow manually via the GitHub UI
+  workflow_dispatch:
+  # Trigger the workflow when a pull_request's activity type is opened,
+  # synchronize, or reopened.
+  pull_request:
+  # Trigger the workflow on push
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    env:
+      # CYPRESS
+      AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
+      AUTH0_SESSION_COOKIE_NAME: ${{ secrets.AUTH0_SESSION_COOKIE_NAME }}
+      AUTH0_USERNAME: ${{ secrets.AUTH0_USERNAME }}
+      AUTH0_PASSWORD: ${{ secrets.AUTH0_PASSWORD }}
+      AUTH0_USERNAMEALT: ${{ secrets.AUTH0_USERNAMEALT }}
+      AUTH0_PASSWORDALT: ${{ secrets.AUTH0_PASSWORDALT }}
+      # NEXT APP
+      AUTH0_ISSUER_BASE_URL: ${{ secrets.AUTH0_ISSUER_BASE_URL }}
+      AUTH0_BASE_URL: ${{ secrets.AUTH0_BASE_URL }}
+      # SHARED
+      AUTH0_AUDIENCE: ${{ secrets.AUTH0_AUDIENCE }}
+      AUTH0_SCOPE: ${{ secrets.AUTH0_SCOPE }}
+      AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
+      AUTH0_SECRET: ${{ secrets.AUTH0_SECRET }}
+      AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: "yarn"
+
+      - uses: bahmutov/npm-install@v1.7.11
+        with:
+          install-command:
+            yarn --prefer-offline --frozen-lockfile --no-progress --silent
+
+      - run: yarn cy:verify
+      - run: yarn dev & # & runs process in the background
+      - run: yarn test:headless
