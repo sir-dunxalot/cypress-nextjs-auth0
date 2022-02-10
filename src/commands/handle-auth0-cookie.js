@@ -66,16 +66,13 @@ Cypress.Commands.add('_handleAuth0Cookie', encryptedSession => {
     }
 
     /**
-     * delete the cookie that is not splitted to ensure that auth0 uses only
-     * the splitted ones. This means setting the value to '' and make sure it
-     * expires immediately (`expiry: 0`).
+     * Delete the cookie that is not splitted to ensure that auth0 uses only
+     * the splitted ones.
      */
-    cy.setCookie(SESSION_COOKIE_NAME, '', {
-      expiry: 0,
-    });
+    cy.clearCookie(SESSION_COOKIE_NAME);
   } else {
     /**
-     * clear other SESSION_COOKIE_NAME.{i} cookies in order to have
+     * Clear other SESSION_COOKIE_NAME.{i} cookies in order to have
      * only one left that is used by auth0
      *
      * Inspired by
@@ -84,9 +81,7 @@ Cypress.Commands.add('_handleAuth0Cookie', encryptedSession => {
     cy.getCookies().then(cookies => {
       cookies.forEach(cookie => {
         if (cookie.name.startsWith(SESSION_COOKIE_NAME)) {
-          cy.setCookie(cookie.name, '', {
-            expiry: 0,
-          });
+          cy.clearCookie(cookie.name);
         }
       });
 
