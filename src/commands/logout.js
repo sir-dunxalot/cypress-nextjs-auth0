@@ -9,6 +9,17 @@ Cypress.Commands.add('logout', (options = {}) => {
   });
   cy.request(builtLogoutUrl);
 
-  // default URL is the default URL that nextjs-auth0 defines and uses
+  /**
+   * Because we preserved cookies they might not be deleted by now. That is why
+   * we force them to be deleted.
+   *
+   * TODO: needs further investigation if this is the way to go when handling
+   * logouts in Cypress.
+   */
+  cy.clearAuth0Cookies();
+
+  /**
+   * default URL is the default URL that nextjs-auth0 defines and uses
+   */
   cy.visit(logoutUrl || '/api/auth/logout');
 });
