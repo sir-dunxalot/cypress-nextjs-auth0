@@ -50,7 +50,7 @@ const SESSION_COOKIE_NAME = Cypress.env('auth0SessionCookieName');
  * CookieHelper is not exposed (yet):
  * @see https://github.com/auth0/nextjs-auth0/issues/335#issuecomment-799401740
  */
-Cypress.Commands.add('_handleAuth0Cookie', encryptedSession => {
+Cypress.Commands.add('_setAuth0Cookie', encryptedSession => {
   const emptyCookie = serialize(`${SESSION_COOKIE_NAME}.0`, '', COOKIE_OPTIONS);
   const chunkSize = MAX_COOKIE_SIZE - emptyCookie.length;
 
@@ -69,7 +69,7 @@ Cypress.Commands.add('_handleAuth0Cookie', encryptedSession => {
      * Delete the cookie that is not splitted to ensure that auth0 uses only
      * the splitted ones.
      */
-    cy.clearCookie(SESSION_COOKIE_NAME);
+    cy._clearAuth0Cookie();
   } else {
     /**
      * Clear other SESSION_COOKIE_NAME.{i} cookies in order to have
@@ -78,13 +78,7 @@ Cypress.Commands.add('_handleAuth0Cookie', encryptedSession => {
      * Inspired by
      * @see https://github.com/auth0/nextjs-auth0/blob/443171b74074eaec5b0e8db6380b05cc359e505e/src/auth0-session/cookie-store.ts#L202-L205
      */
-    cy.getCookies().then(cookies => {
-      cookies.forEach(cookie => {
-        if (cookie.name.startsWith(SESSION_COOKIE_NAME)) {
-          cy.clearCookie(cookie.name);
-        }
-      });
-
+    cy._clearAuth0SplittedCookies().then(() => {
       /**
        * Set one main cookie because its value does not exceed the max size,
        * and nextjs-auth0 needs at least one cookie to be set.

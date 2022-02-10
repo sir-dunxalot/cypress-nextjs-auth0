@@ -4,7 +4,7 @@ declare global {
   namespace Cypress {
     interface Chainable<Subject = any> {
       /**
-       * cy.login() logs in a user with the given credentials (via Cypress.env)
+       * Logs in a user with the given credentials (via Cypress.env)
        * or overwrite the credentials with new credentials.
        */
       login(options?: {
@@ -13,7 +13,7 @@ declare global {
       }): Chainable<Element>;
 
       /**
-       * cy.logout() logs out a user. One can overwrite the returnTo and
+       * Logs the logged in user out. One can overwrite the returnTo and
        * logoutUrl.
        */
       logout(options?: {
@@ -23,6 +23,11 @@ declare global {
          */
         logoutUrl?: string;
       }): Chainable<Element>;
+
+      /**
+       * Clears all existing (splitted or not) Auth0 cookies
+       */
+      clearAuth0Cookies(): Chainable<Element>;
     }
   }
 }

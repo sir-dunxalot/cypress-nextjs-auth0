@@ -42,7 +42,7 @@ Cypress.Commands.add('login', (credentials = {}) => {
             /* https://github.com/auth0/nextjs-auth0/blob/master/src/session/cookie-store/index.ts#L73 */
 
             cy.task('encrypt', payload).then(encryptedSession => {
-              cy._handleAuth0Cookie(encryptedSession);
+              cy._setAuth0Cookie(encryptedSession);
             });
           });
         });
