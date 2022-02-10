@@ -84,10 +84,10 @@ Replacing values with your Auth0 application's values:
   "auth0ClientId": "FNfof292fnNFwveldfg9222rf",
   "auth0ClientSecret": "FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn",
   "auth0CookieSecret": "DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
-  "auth0Password": "mysupersecurepassword",
   "auth0Scope": "openid profile email",
   "auth0SessionCookieName": "appSession",
-  "auth0Username": "testuser@lyft.com"
+  "auth0Username": "testuser@lyft.com",
+  "auth0Password": "mysupersecurepassword"
 }
 ```
 
@@ -123,16 +123,19 @@ If you don't yet specify a port when you run Cypress you will need to add a port
 
 If you have further customized your Auth0 cookie (see
 [CookieConfig](https://auth0.github.io/nextjs-auth0/interfaces/config.cookieconfig.html)),
-you have to set the following environment variables as well:
+you have to add the following environment variables to your Cypress
+configuration:
 
 ```sh
-# .env
+// cypress.env.json
 
-AUTH0_COOKIE_PATH
-AUTH0_COOKIE_HTTP_ONLY
-AUTH0_COOKIE_SAME_SITE
-AUTH0_COOKIE_SECURE
-AUTH0_COOKIE_TRANSIENT
+{
+  "auth0CookiePath": "/",
+  "auth0CookieHttpOnly": "true",
+  "auth0CookieCookieSameSite": "lax" ,
+  "auth0CookieCookieSecure": "true",
+  "auth0CookieTransient": "false",
+}
 ```
 
 Please, take a look at the offical
@@ -368,6 +371,8 @@ Here are the Cypress environment variables (e.g. in `.env`):
 
 ```sh
 # .env
+
+# Auth0 Settings
 AUTH0_AUDIENCE="https://lyft.auth0.com/api/v2/",
 AUTH0_DOMAIN="lyft.auth0.com",
 AUTH0_CLIENT_ID="FNfof292fnNFwveldfg9222rf",
@@ -375,6 +380,15 @@ AUTH0_CLIENT_SECRET="FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn",
 AUTH0_SECRET="DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
 AUTH0_SCOPE="openid profile email",
 AUTH0_SESSION_COOKIE_NAME="appSession",
+
+# Cookie Settings
+AUTH0_COOKIE_PATH
+AUTH0_COOKIE_HTTP_ONLY
+AUTH0_COOKIE_SAME_SITE
+AUTH0_COOKIE_SECURE
+AUTH0_COOKIE_TRANSIENT
+
+# Test Case Settings
 AUTH0_USERNAME="testuser@lyft.com",
 AUTH0_PASSWORD="mysupersecurepassword",
 AUTH0_USERNAMEALT="testuser@lyft.com"

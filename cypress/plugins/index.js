@@ -18,16 +18,16 @@ module.exports = (on, config) => {
       auth0Password: process.env.AUTH0_PASSWORD,
       auth0Scope: process.env.AUTH0_SCOPE,
       auth0SessionCookieName: process.env.AUTH0_SESSION_COOKIE_NAME,
-      // Test Case Settings
-      auth0Username: process.env.AUTH0_USERNAME,
-      auth0UsernameAlt: process.env.AUTH0_USERNAMEALT,
-      auth0PasswordAlt: process.env.AUTH0_PASSWORDALT,
       // Cookie Settings
       auth0CookiePath: process.env.AUTH0_COOKIE_PATH || '/',
       auth0CookieHttpOnly: process.env.AUTH0_COOKIE_HTTP_ONLY,
       auth0CookieCookieSameSite: process.env.AUTH0_COOKIE_SAME_SITE,
       auth0CookieCookieSecure: process.env.AUTH0_COOKIE_SECURE,
       auth0CookieTransient: process.env.AUTH0_COOKIE_TRANSIENT,
+      // Test Case Settings
+      auth0Username: process.env.AUTH0_USERNAME,
+      auth0UsernameAlt: process.env.AUTH0_USERNAMEALT,
+      auth0PasswordAlt: process.env.AUTH0_PASSWORDALT,
     },
     video: false,
     watchForFileChanges: false,
