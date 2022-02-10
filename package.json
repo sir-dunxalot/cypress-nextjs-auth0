@@ -6,9 +6,9 @@
   "main": "dist/cypress-nextjs-auth0.js",
   "types": "types/index.d.ts",
   "files": [
+    "encrypt.js",
     "dist",
-    "types",
-    "encrypt.js"
+    "types"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
