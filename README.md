@@ -21,6 +21,7 @@
     * [login()](#login)
     * [logout()](#logout)
     * [clearAuth0Cookies()](#clearauth0cookies)
+    * [preserveAuth0CookiesOnce()](#preserveauth0cookiesonce)
     * [Preserving Cookies](#preserving-cookies)
     * [Security considerations](#security-considerations)
       * [Use separate tenants](#use-separate-tenants)
@@ -189,6 +190,7 @@ The following commands are now available in your test suite:
 - [login()](#login)
 - [logout()](#logout)
 - [clearAuth0Cookies()](#clearAuth0Cookies)
+- [preserveAuth0CookiesOnce()](#preserveauth0cookiesonce)
 
 ### login()
 
@@ -359,6 +361,43 @@ context('Cookie expires', () => {
         expect(response.status).to.equal(401); // Assert user is logged out
       });
     });
+  });
+});
+```
+
+### preserveAuth0CookiesOnce()
+
+```js
+cy.preserveAuth0CookiesOnce();
+```
+
+`preserveAuth0CookiesOnce()` preserves cookies through multiple tests. It's best
+used in the `beforeEach` hook. For example:
+
+```js
+context('Cookie', () => {
+  before(() => {
+    cy.login();
+  });
+
+  beforeEach(() => {
+    cy.preserveAuth0CookiesOnce();
+  });
+
+  it('user login should preserve cookies', () => {
+    cy.visit('/');
+
+    cy.request('/api/auth/me').then(({ body: user }) => {
+      expect(user.email).to.equal(Cypress.env('auth0Username'));
+    });
+  });
+
+  it('user should be logged in still', () => {
+    cy.visit('/');
+
+    cy.get('[data-test="user-email"]').should(e =>
+      expect(e).to.contain(Cypress.env('auth0Username')),
+    );
   });
 });
 ```

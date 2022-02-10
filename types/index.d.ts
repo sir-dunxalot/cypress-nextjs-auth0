@@ -26,8 +26,21 @@ declare global {
 
       /**
        * Clears all existing (splitted or not) Auth0 cookies
+       *
+       * ## Docs
+       * @see https://docs.cypress.io/api/commands/clearcookie
+       * @see https://docs.cypress.io/api/commands/clearcookies
        */
       clearAuth0Cookies(): Chainable<Element>;
+
+      /**
+       * Preserves cookies through multiple tests. It's best used in the
+       * `beforeEach` hook.
+       *
+       * ## Docs
+       * @see https://docs.cypress.io/api/cypress-api/cookies#Preserve-Once
+       */
+      preserveAuth0Cookies(): Chainable<Element>;
     }
   }
 }

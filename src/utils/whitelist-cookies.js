@@ -1,3 +1,7 @@
+/**
+ * TODO: document how to put this into `cypress/support/index.js` as suggested
+ * by the auth0 docs.
+ */
 Cypress.Cookies.defaults({
   preserve: [
     Cypress.env('auth0SessionCookieName'),
