@@ -65,15 +65,22 @@ Cypress.Commands.add('_handleAuth0Cookie', encryptedSession => {
       cy.setCookie(chunkCookieName, chunkValue, COOKIE_OPTIONS);
     }
 
-    // delete the cookie that is not splitted to ensure that auth0 uses only
-    // the splitted ones.
+    /**
+     * delete the cookie that is not splitted to ensure that auth0 uses only
+     * the splitted ones. This means setting the value to '' and make sure it
+     * expires immediately (`expiry: 0`).
+     */
     cy.setCookie(SESSION_COOKIE_NAME, '', {
       expiry: 0,
     });
   } else {
-    // clear other SESSION_COOKIE_NAME.{i} cookies in order to have
-    // only one left that is used by auth0
-    // https://github.com/auth0/nextjs-auth0/blob/443171b74074eaec5b0e8db6380b05cc359e505e/src/auth0-session/cookie-store.ts#L202-L205
+    /**
+     * clear other SESSION_COOKIE_NAME.{i} cookies in order to have
+     * only one left that is used by auth0
+     *
+     * Inspired by
+     * @see https://github.com/auth0/nextjs-auth0/blob/443171b74074eaec5b0e8db6380b05cc359e505e/src/auth0-session/cookie-store.ts#L202-L205
+     */
     cy.getCookies().then(cookies => {
       cookies.forEach(cookie => {
         if (cookie.name.startsWith(SESSION_COOKIE_NAME)) {
@@ -83,7 +90,10 @@ Cypress.Commands.add('_handleAuth0Cookie', encryptedSession => {
         }
       });
 
-      // set one main cookie because its value does not exceed the max size
+      /**
+       * Set one main cookie because its value does not exceed the max size,
+       * and nextjs-auth0 needs at least one cookie to be set.
+       */
       cy.setCookie(SESSION_COOKIE_NAME, value, COOKIE_OPTIONS);
     });
   }
