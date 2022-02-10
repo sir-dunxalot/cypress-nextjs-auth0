@@ -15,12 +15,12 @@
   },
   "scripts": {
     "build": "microbundle build -f cjs",
-    "dev": "next dev cypress/dummy",
-    "test:ui": "cypress open",
-    "test:headless": "cypress run",
-    "cy:verify": "cypress verify",
     "cy:info": "cypress info",
-    "release": "release-it"
+    "cy:verify": "cypress verify",
+    "dev": "next dev cypress/dummy",
+    "release": "release-it",
+    "test:headless": "cypress run",
+    "test:ui": "cypress open"
   },
   "author": "",
   "license": "MIT",
