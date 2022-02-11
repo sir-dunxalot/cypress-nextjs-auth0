@@ -1,10 +1,6 @@
 {
-  "git": {
-    "commitMessage": "chore: release v${version}"
-  },
   "github": {
     "release": true,
-    "releaseName": "v${version}",
     "skipChecks": true
   },
   "npm": {
@@ -12,6 +8,8 @@
     "skipChecks": true
   },
   "hooks": {
-    "before:init": ["yarn lint", "yarn build"]
+    "before:init": [
+      "yarn build"
+    ]
   }
 }
