@@ -1,13 +1,31 @@
-import auth from '../utils/auth';
+/**
+ * Default logout URL if you use nextjs-auth0's `handleAuth` in
+ * pages/api/[...auth0].ts
+ *
+ * Docs
+ * @see https://auth0.github.io/nextjs-auth0/modules/handlers_auth.html
+ * @see https://auth0.github.io/nextjs-auth0/modules/handlers_logout.html
+ */
+const DEFAULT_LOGOUT_URL = '/api/auth/logout';
 
 Cypress.Commands.add('logout', (options = {}) => {
-  const { returnTo, logoutUrl } = options;
+  const { logoutUrl, returnTo } = options;
 
-  const builtLogoutUrl = auth.client.buildLogoutUrl({
-    clientID: Cypress.env('auth0ClientId'),
-    returnTo: returnTo,
-  });
-  cy.request(builtLogoutUrl);
+  /**
+   * nextjs-auth0's logout URL supports redirecting to a custom `returnTo` URL.
+   * cy.logout supports that and will create a logout URL that either uses the
+   * current hostname or the `returnTo` URLs one.
+   *
+   * @see https://auth0.github.io/nextjs-auth0/interfaces/handlers_logout.logoutoptions.html
+   */
+  const preparedLogoutUrl = new URL(
+    logoutUrl || DEFAULT_LOGOUT_URL,
+    window.location.href,
+  );
+
+  if (typeof returnTo === 'string') {
+    preparedLogoutUrl.searchParams.set('returnTo', returnTo);
+  }
 
   /**
    * Because we preserved cookies they might not be deleted by now. That is why
@@ -21,5 +39,5 @@ Cypress.Commands.add('logout', (options = {}) => {
   /**
    * default URL is the default URL that nextjs-auth0 defines and uses
    */
-  cy.visit(logoutUrl || '/api/auth/logout');
+  cy.visit(preparedLogoutUrl.toString());
 });
