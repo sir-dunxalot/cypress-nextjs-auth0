@@ -20,6 +20,7 @@
     "dev": "next dev cypress/dummy",
     "format": "prettier src/**/*.js cypress/**/*.js encrypt.js --write",
     "lint": "prettier src/**/*.js cypress/**/*.js encrypt.js --check",
+    "prepare": "is-ci || husky install",
     "release": "release-it",
     "test:headless": "cypress run",
     "test:ui": "cypress open"
@@ -36,6 +37,8 @@
     "@auth0/nextjs-auth0": "^1.7.0",
     "cypress": "^9.4.1",
     "dotenv": "^16.0.0",
+    "husky": "^7.0.0",
+    "is-ci": "^3.0.1",
     "isomorphic-unfetch": "^3.1.0",
     "microbundle": "^0.14.2",
     "next": "^12.0.10",
