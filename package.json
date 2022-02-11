@@ -18,6 +18,8 @@
     "cy:info": "cypress info",
     "cy:verify": "cypress verify",
     "dev": "next dev cypress/dummy",
+    "format": "prettier src/**/*.js cypress/**/*.js encrypt.js --write",
+    "lint": "prettier src/**/*.js cypress/**/*.js encrypt.js --check",
     "release": "release-it",
     "test:headless": "cypress run",
     "test:ui": "cypress open"
@@ -37,6 +39,7 @@
     "isomorphic-unfetch": "^3.1.0",
     "microbundle": "^0.14.2",
     "next": "^12.0.10",
+    "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "release-it": "^14.12.4"
