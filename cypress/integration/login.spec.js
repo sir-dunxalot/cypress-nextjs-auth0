@@ -9,7 +9,6 @@ const credentialsAlt = {
 };
 
 context('cy.login()', () => {
-
   it('should login and authenticate an API call', () => {
     cy.login().then(() => {
       cy.request('http://localhost:3000/api/auth/me').then(({ body: user }) => {
@@ -28,8 +27,12 @@ context('cy.login()', () => {
     cy.login().then(() => {
       cy.visit('/');
 
-      cy.get('[data-test="user-email"]').should((e) => expect(e).to.contain(credentialsDefault.username));
-      cy.get('[data-test="user-sub"]').invoke('text').should((s) => expect(s).to.have.length.of.at.least(1));
+      cy.get('[data-test="user-email"]').should(e =>
+        expect(e).to.contain(credentialsDefault.username),
+      );
+      cy.get('[data-test="user-sub"]')
+        .invoke('text')
+        .should(s => expect(s).to.have.length.of.at.least(1));
     });
   });
 
@@ -39,8 +42,12 @@ context('cy.login()', () => {
 
       cy.reload();
 
-      cy.get('[data-test="user-email"]').should((e) => expect(e).to.contain(credentialsDefault.username));
-      cy.get('[data-test="user-sub"]').invoke('text').should((s) => expect(s).to.have.length.of.at.least(1));
+      cy.get('[data-test="user-email"]').should(e =>
+        expect(e).to.contain(credentialsDefault.username),
+      );
+      cy.get('[data-test="user-sub"]')
+        .invoke('text')
+        .should(s => expect(s).to.have.length.of.at.least(1));
     });
   });
 
@@ -52,8 +59,12 @@ context('cy.login()', () => {
 
       cy.location('pathname').should('equal', '/account');
 
-      cy.get('[data-test="user-email"]').should((e) => expect(e).to.contain(credentialsDefault.username));
-      cy.get('[data-test="user-sub"]').invoke('text').should((s) => expect(s).to.have.length.of.at.least(1));
+      cy.get('[data-test="user-email"]').should(e =>
+        expect(e).to.contain(credentialsDefault.username),
+      );
+      cy.get('[data-test="user-sub"]')
+        .invoke('text')
+        .should(s => expect(s).to.have.length.of.at.least(1));
     });
   });
 
@@ -71,5 +82,4 @@ context('cy.login()', () => {
       });
     });
   });
-
 });

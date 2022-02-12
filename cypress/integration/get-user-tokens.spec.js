@@ -1,9 +1,12 @@
 context('cy.getUserTokens()', () => {
-
   it('should return tokens', () => {
-    cy.getUserTokens().then((response) => {
+    cy.getUserTokens().then(response => {
       const tokenKeys = [
-        'accessToken', 'expiresIn', 'idToken', 'scope', 'tokenType'
+        'accessToken',
+        'expiresIn',
+        'idToken',
+        'scope',
+        'tokenType',
       ];
 
       expect(response).to.have.all.keys(...tokenKeys);
@@ -17,5 +20,4 @@ context('cy.getUserTokens()', () => {
       expect(tokenType).to.equal('Bearer');
     });
   });
-
 });
