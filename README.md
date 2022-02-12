@@ -5,30 +5,30 @@
 
 ## Contents
 
-* [cypress-nextjs-auth0](#cypress-nextjs-auth0)
-  * [Contents](#contents)
-  * [Compatibility](#compatibility)
-  * [Installation](#installation)
-    * [Step 1: Install the addon](#step-1-install-the-addon)
-    * [Step 2: Import the commands](#step-2-import-the-commands)
-    * [Step 3: Register the task](#step-3-register-the-task)
-    * [Step 4: Create a test user](#step-4-create-a-test-user)
-    * [Step 5: Add Auth0 credentials](#step-5-add-auth0-credentials)
-    * [Step 6: Configure Auth0](#step-6-configure-auth0)
-    * [Cookie Settings](#cookie-settings)
-    * [Installation troubleshooting](#installation-troubleshooting)
-  * [Usage](#usage)
-    * [login()](#login)
-    * [logout()](#logout)
-    * [clearAuth0Cookies()](#clearauth0cookies)
-    * [preserveAuth0CookiesOnce()](#preserveauth0cookiesonce)
-    * [Preserving Cookies](#preserving-cookies)
-    * [Security considerations](#security-considerations)
-      * [Use separate tenants](#use-separate-tenants)
-      * [Storing credentials](#storing-credentials)
-      * [Continuous integration](#continuous-integration)
-  * [Contributing](#contributing)
-  * [Releasing](#releasing)
+- [cypress-nextjs-auth0](#cypress-nextjs-auth0)
+  - [Contents](#contents)
+  - [Compatibility](#compatibility)
+  - [Installation](#installation)
+    - [Step 1: Install the addon](#step-1-install-the-addon)
+    - [Step 2: Import the commands](#step-2-import-the-commands)
+    - [Step 3: Register the task](#step-3-register-the-task)
+    - [Step 4: Create a test user](#step-4-create-a-test-user)
+    - [Step 5: Add Auth0 credentials](#step-5-add-auth0-credentials)
+    - [Step 6: Configure Auth0](#step-6-configure-auth0)
+    - [Cookie Settings](#cookie-settings)
+    - [Installation troubleshooting](#installation-troubleshooting)
+  - [Usage](#usage)
+    - [login()](#login)
+    - [logout()](#logout)
+    - [clearAuth0Cookies()](#clearauth0cookies)
+    - [preserveAuth0CookiesOnce()](#preserveauth0cookiesonce)
+    - [Preserving Cookies](#preserving-cookies)
+    - [Security considerations](#security-considerations)
+      - [Use separate tenants](#use-separate-tenants)
+      - [Storing credentials](#storing-credentials)
+      - [Continuous integration](#continuous-integration)
+  - [Contributing](#contributing)
+  - [Releasing](#releasing)
 
 ## Compatibility
 
@@ -260,11 +260,9 @@ in `cypress.env.json` rather than in your source code.
 cy.logout();
 ```
 
-| Property            | Type     | Default value | Required? |
-| ------------------- | -------- | ------------- | --------- |
-| `options`           | `Object` | None          | No        |
-| `options.returnTo`  | `String` | None          | No        |
-| `options.logoutUrl` | `String` | None          | No        |
+| Property   | Type     | Default value | Required? |
+| ---------- | -------- | ------------- | --------- |
+| `returnTo` | `String` | None          | No        |
 
 Call `logout()` anywhere in a test. For example:
 
@@ -301,22 +299,7 @@ context('Logging out', () => {
     cy.login().then(() => {
       cy.visit('/');
 
-      cy.logout({ returnTo: '/thanks-for-visiting' });
-    });
-  });
-});
-```
-
-You can pass a custom logoutUrl `logout()`, which the user will be taken to to
-log out:
-
-```js
-context('Logging out', () => {
-  it('should logout', () => {
-    cy.login().then(() => {
-      cy.visit('/');
-
-      cy.logout({ logoutUrl: '/api/auth/logout' });
+      cy.logout('/thanks-for-visiting');
     });
   });
 });
