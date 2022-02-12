@@ -29,6 +29,7 @@
       - [Continuous integration](#continuous-integration)
   - [Contributing](#contributing)
   - [Releasing](#releasing)
+  - [Contributors ✨](#contributors-)
 
 ## Compatibility
 
