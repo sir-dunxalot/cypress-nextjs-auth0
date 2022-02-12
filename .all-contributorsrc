@@ -1,0 +1,52 @@
+{
+  "projectName": "cypress-nextjs-auth0",
+  "projectOwner": "sir-dunxalot",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "eslint",
+  "contributors": [
+    {
+      "login": "sir-dunxalot",
+      "name": "Duncan Walker",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4495352?v=4",
+      "profile": "https://github.com/sir-dunxalot",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "natterstefan",
+      "name": "Stefan Natter",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1043668?v=4",
+      "profile": "https://natterstefan.me/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "adamjmcgrath",
+      "name": "Adam Mcgrath",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1299658?v=4",
+      "profile": "https://github.com/adamjmcgrath",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "marklawlor",
+      "name": "Mark Lawlor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3946701?v=4",
+      "profile": "https://github.com/marklawlor",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
