@@ -29,6 +29,7 @@
       - [Continuous integration](#continuous-integration)
   - [Contributing](#contributing)
   - [Releasing](#releasing)
+  - [Contributors ✨](#contributors-)
 
 ## Compatibility
 
@@ -541,3 +542,29 @@ yarn release minor # e.g. 1.0.0 --> 1.1.0
 yarn release major # e.g. 1.0.0 --> 2.0.0
 yarn release 1.2.4 # e.g. 1.0.0 --> 1.2.4
 ```
+
+## Contributors ✨
+
+Thanks goes to these wonderful people
+([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/sir-dunxalot"><img src="https://avatars.githubusercontent.com/u/4495352?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Duncan Walker</b></sub></a><br /><a href="#ideas-sir-dunxalot" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/sir-dunxalot/cypress-nextjs-auth0/commits?author=sir-dunxalot" title="Code">💻</a></td>
+    <td align="center"><a href="https://natterstefan.me/"><img src="https://avatars.githubusercontent.com/u/1043668?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Stefan Natter</b></sub></a><br /><a href="https://github.com/sir-dunxalot/cypress-nextjs-auth0/commits?author=natterstefan" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/adamjmcgrath"><img src="https://avatars.githubusercontent.com/u/1299658?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Adam Mcgrath</b></sub></a><br /><a href="https://github.com/sir-dunxalot/cypress-nextjs-auth0/commits?author=adamjmcgrath" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/marklawlor"><img src="https://avatars.githubusercontent.com/u/3946701?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mark Lawlor</b></sub></a><br /><a href="https://github.com/sir-dunxalot/cypress-nextjs-auth0/commits?author=marklawlor" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the
+[all-contributors](https://github.com/all-contributors/all-contributors)
+specification. Contributions of any kind welcome!
