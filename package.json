@@ -5,20 +5,31 @@
   "source": "src/index.js",
   "main": "dist/cypress-nextjs-auth0.js",
   "types": "types/index.d.ts",
+  "files": [
+    "encrypt.js",
+    "dist",
+    "types"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "build": "microbundle build -f cjs",
-    "dev": "next dev cypress/dummy",
-    "test:ui": "cypress open",
-    "test:headless": "cypress run",
-    "cy:verify": "cypress verify",
     "cy:info": "cypress info",
-    "release": "release-it"
+    "cy:verify": "cypress verify",
+    "dev": "next dev cypress/dummy",
+    "release": "release-it",
+    "test:headless": "cypress run",
+    "test:ui": "cypress open"
   },
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "auth0-js": "^9.19.0",
+    "cookie": "^0.4.2",
+    "futoin-hkdf": "^1.4.3",
+    "jose": "^2.0.5"
+  },
   "devDependencies": {
     "@auth0/nextjs-auth0": "^1.7.0",
     "cypress": "^9.4.1",
@@ -29,10 +40,5 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "release-it": "^14.12.4"
-  },
-  "dependencies": {
-    "auth0-js": "^9.19.0",
-    "futoin-hkdf": "^1.4.3",
-    "jose": "^2.0.5"
   }
 }

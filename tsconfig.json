@@ -1,5 +1,5 @@
 {
   "compilerOptions": {
-    "declaration": false, // https://github.com/developit/microbundle/issues/771
+    "declaration": false // https://github.com/developit/microbundle/issues/771
   }
 }
