@@ -96,6 +96,8 @@ Replacing values with your Auth0 application's values:
   "auth0CookieSecret": "DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
   "auth0Scope": "openid profile email",
   "auth0SessionCookieName": "appSession",
+  "auth0LogoutUrl": "/api/auth/logout",
+  "auth0ReturnToUrl": "/",
   "auth0Username": "testuser@lyft.com",
   "auth0Password": "mysupersecurepassword"
 }
@@ -503,12 +505,16 @@ AUTH0_SECRET="DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
 AUTH0_SCOPE="openid profile email",
 AUTH0_SESSION_COOKIE_NAME="appSession",
 
+# cypress-nextjs-auth0 settings
+AUTH0_LOGOUT_URL="/api/auth/logout"
+AUTH0_RETURN_TO_URL="/"
+
 # Cookie Settings
-AUTH0_COOKIE_PATH
-AUTH0_COOKIE_HTTP_ONLY
-AUTH0_COOKIE_SAME_SITE
-AUTH0_COOKIE_SECURE
-AUTH0_COOKIE_TRANSIENT
+AUTH0_COOKIE_PATH=
+AUTH0_COOKIE_HTTP_ONLY=
+AUTH0_COOKIE_SAME_SITE=
+AUTH0_COOKIE_SECURE=
+AUTH0_COOKIE_TRANSIENT=
 
 # Test Case Settings
 AUTH0_USERNAME="testuser@lyft.com",

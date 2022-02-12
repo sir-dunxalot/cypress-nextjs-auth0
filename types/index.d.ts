@@ -13,16 +13,9 @@ declare global {
       }): Chainable<Element>;
 
       /**
-       * Logs the logged in user out. One can overwrite the returnTo and
-       * logoutUrl.
+       * Logs the logged in user out. One can add a custom returnTo URL.
        */
-      logout(options?: {
-        returnTo?: string;
-        /**
-         * @example "/api/auth/logout"
-         */
-        logoutUrl?: string;
-      }): Chainable<Element>;
+      logout(returnTo?: string): Chainable<Element>;
 
       /**
        * Clears all existing (splitted or not) Auth0 cookies

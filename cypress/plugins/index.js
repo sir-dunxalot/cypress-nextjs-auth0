@@ -18,6 +18,9 @@ module.exports = (on, config) => {
       auth0Password: process.env.AUTH0_PASSWORD,
       auth0Scope: process.env.AUTH0_SCOPE,
       auth0SessionCookieName: process.env.AUTH0_SESSION_COOKIE_NAME,
+      // cypress-nextjs-auth0 settings
+      auth0LogoutUrl: process.env.AUTH0_LOGOUT_URL,
+      auth0ReturnToUrl: process.env.AUTH0_RETURN_TO_URL,
       // Cookie Settings
       auth0CookiePath: process.env.AUTH0_COOKIE_PATH || '/',
       auth0CookieHttpOnly: process.env.AUTH0_COOKIE_HTTP_ONLY,

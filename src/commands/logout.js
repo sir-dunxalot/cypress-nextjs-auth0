@@ -8,9 +8,7 @@
  */
 const DEFAULT_LOGOUT_URL = '/api/auth/logout';
 
-Cypress.Commands.add('logout', (options = {}) => {
-  const { logoutUrl, returnTo } = options;
-
+Cypress.Commands.add('logout', returnTo => {
   /**
    * nextjs-auth0's logout URL supports redirecting to a custom `returnTo` URL.
    * cy.logout supports that and will create a logout URL that either uses the
@@ -19,12 +17,13 @@ Cypress.Commands.add('logout', (options = {}) => {
    * @see https://auth0.github.io/nextjs-auth0/interfaces/handlers_logout.logoutoptions.html
    */
   const preparedLogoutUrl = new URL(
-    logoutUrl || DEFAULT_LOGOUT_URL,
+    Cypress.env('auth0LogoutUrl') || DEFAULT_LOGOUT_URL,
     window.location.href,
   );
 
-  if (typeof returnTo === 'string') {
-    preparedLogoutUrl.searchParams.set('returnTo', returnTo);
+  const preparedReturnTo = returnTo || Cypress.env('auth0ReturnToUrl');
+  if (preparedReturnTo) {
+    preparedLogoutUrl.searchParams.set('returnTo', preparedReturnTo);
   }
 
   /**
