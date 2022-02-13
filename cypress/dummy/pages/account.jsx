@@ -14,10 +14,10 @@ const Page = props => {
 
       <dl>
         <dd>User ID</dd>
-        <dt data-test="user-sub">{user?.sub}</dt>
+        <dt data-testid="user-sub">{user?.sub}</dt>
 
         <dd>User email</dd>
-        <dt data-test="user-email">{user?.email}</dt>
+        <dt data-testid="user-email">{user?.email}</dt>
       </dl>
     </div>
   );

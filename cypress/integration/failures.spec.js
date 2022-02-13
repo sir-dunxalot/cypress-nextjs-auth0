@@ -2,10 +2,10 @@ context('cy.login() failures', () => {
   it('should not be logged in without calling login()', () => {
     cy.visit('/');
 
-    cy.get('[data-test="user-email"]')
+    cy.findByTestId('user-email')
       .invoke('text')
       .should(s => expect(s).to.have.lengthOf(0));
-    cy.get('[data-test="user-sub"]')
+    cy.findByTestId('user-sub')
       .invoke('text')
       .should(s => expect(s).to.have.lengthOf(0));
   });
