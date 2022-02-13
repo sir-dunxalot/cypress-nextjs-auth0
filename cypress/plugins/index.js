@@ -22,6 +22,7 @@ module.exports = (on, config) => {
       auth0LogoutUrl: process.env.AUTH0_LOGOUT_URL,
       auth0ReturnToUrl: process.env.AUTH0_RETURN_TO_URL,
       // Cookie Settings
+      auth0CookieDomain: process.env.AUTH0_COOKIE_DOMAIN,
       auth0CookiePath: process.env.AUTH0_COOKIE_PATH || '/',
       auth0CookieHttpOnly: process.env.AUTH0_COOKIE_HTTP_ONLY,
       auth0CookieCookieSameSite: process.env.AUTH0_COOKIE_SAME_SITE,

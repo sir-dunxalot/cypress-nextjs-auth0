@@ -154,6 +154,7 @@ configuration:
 // cypress.env.json
 
 {
+  "auth0CookieDomain": "localhost"
   "auth0CookiePath": "/",
   "auth0CookieHttpOnly": "true",
   "auth0CookieCookieSameSite": "lax" ,
@@ -494,11 +495,12 @@ AUTH0_LOGOUT_URL="/api/auth/logout"
 AUTH0_RETURN_TO_URL="/"
 
 # Cookie Settings
-AUTH0_COOKIE_PATH=
-AUTH0_COOKIE_HTTP_ONLY=
-AUTH0_COOKIE_SAME_SITE=
-AUTH0_COOKIE_SECURE=
-AUTH0_COOKIE_TRANSIENT=
+# AUTH0_COOKIE_DOMAIN=
+# AUTH0_COOKIE_PATH=
+# AUTH0_COOKIE_HTTP_ONLY=
+# AUTH0_COOKIE_SAME_SITE=
+# AUTH0_COOKIE_SECURE=
+# AUTH0_COOKIE_TRANSIENT=
 
 # Test Case Settings
 AUTH0_USERNAME="testuser@lyft.com",
