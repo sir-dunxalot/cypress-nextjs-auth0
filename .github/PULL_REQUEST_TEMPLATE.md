@@ -14,3 +14,7 @@ release.
 <!-- Briefly explain how one can test this new feature
 ## How to test
 - -->
+
+<!-- List all issues this Pull Request resolves (e.g. resolves #44)
+## Related Issues
+- -->
