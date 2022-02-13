@@ -1,7 +1,7 @@
 import React from 'react';
 import { useUser } from '@auth0/nextjs-auth0';
 
-const Page = (props) => {
+const Page = props => {
   const { user } = useUser();
 
   return (
