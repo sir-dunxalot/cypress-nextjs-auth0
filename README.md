@@ -34,7 +34,7 @@
 ## Compatibility
 
 - For `@auth0/nextjs-auth0` version `^1.0.0` use `^2.0.0` of this library
-  (documentation is on master branch)
+  (documentation is on main branch)
 - For `@auth0/nextjs-auth0` version `^0.0.0` use `^1.0.0` of this library
   ([documentation is here](https://github.com/sir-dunxalot/cypress-nextjs-auth0/blob/d3b46cf49772486678f4c5a41bfba7e2638ee1c5/README.md))
 

@@ -9,7 +9,7 @@ on:
   # Trigger the workflow on push
   push:
     branches:
-      - master
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
