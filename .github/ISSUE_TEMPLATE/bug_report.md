@@ -32,13 +32,13 @@ assignees: ''
 2. Step 2
 3. Step 3
 
-#### Observed Results
-
-<!-- What happened? This could be a description, log output, etc. -->
-
 #### Expected Results
 
 <!-- What did you expect to happen? -->
+
+#### Observed Results
+
+<!-- What happened? This could be a description, log output, etc. -->
 
 #### Relevant Code (optional)
 
