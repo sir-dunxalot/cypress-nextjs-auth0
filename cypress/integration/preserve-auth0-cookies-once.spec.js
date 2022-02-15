@@ -22,8 +22,9 @@ context('Cookie', () => {
   it('user should be logged in still', () => {
     cy.visit('/');
 
-    cy.get('[data-test="user-email"]').should(e =>
-      expect(e).to.contain(Cypress.env('auth0Username')),
+    cy.findByTestId('user-email').should(
+      'have.text',
+      Cypress.env('auth0Username'),
     );
   });
 });

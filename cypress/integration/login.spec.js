@@ -27,10 +27,11 @@ context('cy.login()', () => {
     cy.login().then(() => {
       cy.visit('/');
 
-      cy.get('[data-test="user-email"]').should(e =>
-        expect(e).to.contain(credentialsDefault.username),
+      cy.findByTestId('user-email').should(
+        'have.text',
+        credentialsDefault.username,
       );
-      cy.get('[data-test="user-sub"]')
+      cy.findByTestId('user-sub')
         .invoke('text')
         .should(s => expect(s).to.have.length.of.at.least(1));
     });
@@ -42,10 +43,11 @@ context('cy.login()', () => {
 
       cy.reload();
 
-      cy.get('[data-test="user-email"]').should(e =>
-        expect(e).to.contain(credentialsDefault.username),
+      cy.findByTestId('user-email').should(
+        'have.text',
+        credentialsDefault.username,
       );
-      cy.get('[data-test="user-sub"]')
+      cy.findByTestId('user-sub')
         .invoke('text')
         .should(s => expect(s).to.have.length.of.at.least(1));
     });
@@ -59,10 +61,11 @@ context('cy.login()', () => {
 
       cy.location('pathname').should('equal', '/account');
 
-      cy.get('[data-test="user-email"]').should(e =>
-        expect(e).to.contain(credentialsDefault.username),
+      cy.findByTestId('user-email').should(
+        'have.text',
+        credentialsDefault.username,
       );
-      cy.get('[data-test="user-sub"]')
+      cy.findByTestId('user-sub')
         .invoke('text')
         .should(s => expect(s).to.have.length.of.at.least(1));
     });

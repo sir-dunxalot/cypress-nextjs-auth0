@@ -154,6 +154,7 @@ configuration:
 // cypress.env.json
 
 {
+  "auth0CookieDomain": "localhost"
   "auth0CookiePath": "/",
   "auth0CookieHttpOnly": "true",
   "auth0CookieCookieSameSite": "lax" ,
@@ -381,7 +382,12 @@ context('Cookie', () => {
   it('user should be logged in still', () => {
     cy.visit('/');
 
-    cy.get('[data-test="user-email"]').should(e =>
+    // or if you use @testing-library/cypress
+    // cy.findByTestId('user-email').should(
+    //   'have.text',
+    //   Cypress.env('auth0Username'),
+    // );
+    cy.get('[data-testid="user-email"]').should(e =>
       expect(e).to.contain(Cypress.env('auth0Username')),
     );
   });
@@ -494,11 +500,12 @@ AUTH0_LOGOUT_URL="/api/auth/logout"
 AUTH0_RETURN_TO_URL="/"
 
 # Cookie Settings
-AUTH0_COOKIE_PATH=
-AUTH0_COOKIE_HTTP_ONLY=
-AUTH0_COOKIE_SAME_SITE=
-AUTH0_COOKIE_SECURE=
-AUTH0_COOKIE_TRANSIENT=
+# AUTH0_COOKIE_DOMAIN=
+# AUTH0_COOKIE_PATH=
+# AUTH0_COOKIE_HTTP_ONLY=
+# AUTH0_COOKIE_SAME_SITE=
+# AUTH0_COOKIE_SECURE=
+# AUTH0_COOKIE_TRANSIENT=
 
 # Test Case Settings
 AUTH0_USERNAME="testuser@lyft.com",

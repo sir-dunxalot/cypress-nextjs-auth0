@@ -20,8 +20,8 @@
     "cy:info": "cypress info",
     "cy:verify": "cypress verify",
     "dev": "next dev cypress/dummy",
-    "format": "prettier src/**/*.js cypress/**/*.js README.md encrypt.js --write",
-    "lint": "prettier src/**/*.js cypress/**/*.js README.md encrypt.js --check",
+    "format": "prettier \"./**/*.(js|jsx|md)\" --write",
+    "lint": "prettier \"./**/*.(js|jsx|md)\" --check",
     "prepare": "is-ci || husky install",
     "release": "release-it",
     "test:headless": "cypress run",
@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@auth0/nextjs-auth0": "^1.7.0",
+    "@testing-library/cypress": "^8.0.2",
     "all-contributors-cli": "^6.20.0",
     "cypress": "^9.4.1",
     "dotenv": "^16.0.0",

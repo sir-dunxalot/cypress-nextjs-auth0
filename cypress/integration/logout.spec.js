@@ -3,19 +3,20 @@ context('cy.logout()', () => {
     cy.login().then(() => {
       cy.visit('/');
 
-      cy.get('[data-test="user-email"]').should(e =>
-        expect(e).to.contain(Cypress.env('auth0Username')),
+      cy.findByTestId('user-email').should(
+        'have.text',
+        Cypress.env('auth0Username'),
       );
-      cy.get('[data-test="user-sub"]')
+      cy.findByTestId('user-sub')
         .invoke('text')
         .should(s => expect(s).to.have.length.of.at.least(1));
 
       cy.logout();
 
-      cy.get('[data-test="user-email"]')
+      cy.findByTestId('user-email')
         .invoke('text')
         .should(s => expect(s).to.have.lengthOf(0));
-      cy.get('[data-test="user-sub"]')
+      cy.findByTestId('user-sub')
         .invoke('text')
         .should(s => expect(s).to.have.lengthOf(0));
 
@@ -33,10 +34,11 @@ context('cy.logout()', () => {
     cy.login().then(() => {
       cy.visit('/');
 
-      cy.get('[data-test="user-email"]').should(e =>
-        expect(e).to.contain(Cypress.env('auth0Username')),
+      cy.findByTestId('user-email').should(
+        'have.text',
+        Cypress.env('auth0Username'),
       );
-      cy.get('[data-test="user-sub"]')
+      cy.findByTestId('user-sub')
         .invoke('text')
         .should(s => expect(s).to.have.length.of.at.least(1));
 
