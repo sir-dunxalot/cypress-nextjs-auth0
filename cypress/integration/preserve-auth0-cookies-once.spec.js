@@ -1,30 +1,50 @@
-/**
- * Cypress automatically clears all cookies before each test to prevent state
- * from building up, that's why we test preserving cookies here.
- */
-context('Cookie', () => {
-  before(() => {
-    cy.login();
-  });
+const tests = [
+  {
+    title: 'Cookie',
+    credentials: undefined,
+  },
+  {
+    title: 'Split Cookie',
+    credentials: {
+      username: Cypress.env('auth0SplitCookieUsername'),
+      password: Cypress.env('auth0SplitCookiePassword'),
+    },
+  },
+];
 
-  beforeEach(() => {
-    cy.preserveAuth0CookiesOnce();
-  });
+for (const { title, credentials } of tests) {
+  /**
+   * Cypress automatically clears all cookies before each test to prevent state
+   * from building up, that's why we test preserving cookies here.
+   */
+  context(title, () => {
+    before(() => {
+      cy.login(credentials);
+    });
 
-  it('user login should preserve cookies', () => {
-    cy.visit('/');
+    beforeEach(() => {
+      cy.preserveAuth0CookiesOnce();
+    });
 
-    cy.request('/api/auth/me').then(({ body: user }) => {
-      expect(user.email).to.equal(Cypress.env('auth0Username'));
+    it('user login should preserve cookies', () => {
+      cy.visit('/');
+
+      cy.request('/api/auth/me').then(({ body: user }) => {
+        expect(user.email).to.equal(Cypress.env('auth0Username'));
+      });
+    });
+
+    it('user should be logged in still', () => {
+      cy.visit('/');
+
+      cy.findByTestId('user-email').should(
+        'have.text',
+        Cypress.env('auth0Username'),
+      );
+    });
+
+    after(() => {
+      cy.logout();
     });
   });
-
-  it('user should be logged in still', () => {
-    cy.visit('/');
-
-    cy.findByTestId('user-email').should(
-      'have.text',
-      Cypress.env('auth0Username'),
-    );
-  });
-});
+}
