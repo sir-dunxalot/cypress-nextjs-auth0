@@ -6,8 +6,8 @@ const tests = [
   {
     title: 'Split Cookie',
     credentials: {
-      username: Cypress.env('auth0SplitCookieUsername'),
-      password: Cypress.env('auth0SplitCookiePassword'),
+      username: Cypress.env('auth0UsernameSplitCookie'),
+      password: Cypress.env('auth0PasswordSplitCookie'),
     },
   },
 ];
