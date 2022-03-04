@@ -478,8 +478,29 @@ To get values for these environment variables you can:
 - Create a new (free tier) tenant and application in Auth0 and set it up as
   documented in [the installation steps](#installation)
 
-If you use your own Auth0 tenant, notice that you need two test users (for
-`AUTH0_USERNAME` and `AUTH0_USERNAMEALT`).
+If you use your own Auth0 tenant, notice that you need three test users (for
+`AUTH0_USERNAME`, `AUTH0_USERNAMEALT` and `AUTH0_USERNAME_SPLIT_COOKIE`).
+
+User `AUTH0_USERNAME_SPLIT_COOKIE` is assumed to generate a large enough cookie
+to split into at least two pieces. You can achieve this by following the steps
+below:
+
+- open the test user
+- add arbitrary values to `app_metadata` like an array with at least 40 values
+- go to Auth Pipeline/Rules and create a new empty rule
+- set name to: Append metadata to ID token
+- set script to:
+
+```
+function(user, context, callback) {
+  context.idToken['app_metadata'] = user.app_metadata || {}
+  callback(null, user, context);
+}
+```
+
+The script adds `app_metadata` to the ID token which takes part in cookie
+creation. Be aware that adding too much data to `app_metadata` might cause the
+`Set Cookie` header to overflow and fail the request with status code `431`.
 
 Here are the Cypress environment variables (e.g. in `.env`):
 
@@ -506,12 +527,16 @@ AUTH0_RETURN_TO_URL="/"
 # AUTH0_COOKIE_SAME_SITE=
 # AUTH0_COOKIE_SECURE=
 # AUTH0_COOKIE_TRANSIENT=
+# AUTH0_USERNAME_SPLIT_COOKIE=
+# AUTH0_PASSWORD_SPLIT_COOKIE=
 
 # Test Case Settings
 AUTH0_USERNAME="testuser@lyft.com",
 AUTH0_PASSWORD="mysupersecurepassword",
 AUTH0_USERNAMEALT="testuser@lyft.com"
 AUTH0_PASSWORDALT="anothersupersecurepassword",
+AUTH0_USERNAME_SPLIT_COOKIE="testuser@lyft.com",
+AUTH0_PASSWORD_SPLIT_COOKIE="splitcookieuserpassword",
 ```
 
 Here are the Next.js app variables (e.g. in `cypress/dummy/.env`).
