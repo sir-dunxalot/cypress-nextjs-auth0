@@ -1,4 +1,4 @@
-const tests = [
+const testSuites = [
   {
     title: 'Cookie',
     credentials: undefined,
@@ -12,7 +12,7 @@ const tests = [
   },
 ];
 
-for (const { title, credentials } of tests) {
+testSuites.forEach(({ title, credentials }) => {
   /**
    * Cypress automatically clears all cookies before each test to prevent state
    * from building up, that's why we test preserving cookies here.
@@ -47,4 +47,4 @@ for (const { title, credentials } of tests) {
       cy.logout();
     });
   });
-}
+});
