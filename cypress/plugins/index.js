@@ -32,6 +32,8 @@ module.exports = (on, config) => {
       auth0Username: process.env.AUTH0_USERNAME,
       auth0UsernameAlt: process.env.AUTH0_USERNAMEALT,
       auth0PasswordAlt: process.env.AUTH0_PASSWORDALT,
+      auth0UsernameSplitCookie: process.env.AUTH0_USERNAME_SPLIT_COOKIE,
+      auth0PasswordSplitCookie: process.env.AUTH0_PASSWORD_SPLIT_COOKIE,
     },
     video: false,
     watchForFileChanges: false,

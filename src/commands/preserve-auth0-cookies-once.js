@@ -12,7 +12,7 @@ Cypress.Commands.add('preserveAuth0CookiesOnce', () => {
     Cypress.env('auth0SessionCookieName'),
     // We assume that the cookie is never splitted into more than 10 parts
     ...Array(10)
-      .fill(1)
+      .fill(0)
       .map(
         (value, index) =>
           `${Cypress.env('auth0SessionCookieName')}.${value + index}`,
