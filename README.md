@@ -76,7 +76,7 @@ In [security considerations](#security-considerations) you will see that
 user in a test-specific Auth0 tenant.
 
 You'll need this user's email and password to complete `auth0Username` and
-`auth0Password` in step 4.
+`auth0Password` in step 5.
 
 ### Step 5: Add Auth0 credentials
 
@@ -108,7 +108,7 @@ Everything except `auth0Username` and `auth0Password` should match your app's
 existing Auth0 settings.
 
 `auth0Username` and `auth0Password` are the email and password of the test user
-you created in step 3.
+you created in step 4.
 
 ### Step 6: Configure Auth0
 
