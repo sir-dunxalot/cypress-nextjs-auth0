@@ -498,13 +498,13 @@ Here are the Cypress environment variables (e.g. in `.env`):
 # .env
 
 # Auth0 Settings
-AUTH0_AUDIENCE="https://lyft.auth0.com/api/v2/",
-AUTH0_DOMAIN="lyft.auth0.com",
-AUTH0_CLIENT_ID="FNfof292fnNFwveldfg9222rf",
-AUTH0_CLIENT_SECRET="FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn",
-AUTH0_SECRET="DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
-AUTH0_SCOPE="openid profile email",
-AUTH0_SESSION_COOKIE_NAME="appSession",
+AUTH0_AUDIENCE="https://lyft.auth0.com/api/v2/"
+AUTH0_DOMAIN="lyft.auth0.com"
+AUTH0_CLIENT_ID="FNfof292fnNFwveldfg9222rf"
+AUTH0_CLIENT_SECRET="FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn"
+AUTH0_SECRET="DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D"
+AUTH0_SCOPE="openid profile email"
+AUTH0_SESSION_COOKIE_NAME="appSession"
 
 # cypress-nextjs-auth0 settings
 AUTH0_LOGOUT_URL="/api/auth/logout"
@@ -519,10 +519,10 @@ AUTH0_RETURN_TO_URL="/"
 # AUTH0_COOKIE_TRANSIENT=
 
 # Test Case Settings
-AUTH0_USERNAME="testuser@lyft.com",
-AUTH0_PASSWORD="mysupersecurepassword",
+AUTH0_USERNAME="testuser@lyft.com"
+AUTH0_PASSWORD="mysupersecurepassword"
 AUTH0_USERNAMEALT="testuser@lyft.com"
-AUTH0_PASSWORDALT="anothersupersecurepassword",
+AUTH0_PASSWORDALT="anothersupersecurepassword"
 ```
 
 Here are the Next.js app variables (e.g. in `cypress/dummy/.env`).
