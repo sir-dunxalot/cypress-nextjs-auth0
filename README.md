@@ -117,7 +117,9 @@ Grant Type:
 
 ![auth0-grant-types](https://user-images.githubusercontent.com/4495352/83317105-6fed3780-a1f8-11ea-8d86-192e7e25f84b.jpg)
 
-**Step 6.2**: Go to your
+**Step 6.2**:
+
+**OPTION A:** Go to your
 [Auth0 tenant's settings](https://manage.auth0.com/#/tenant) (make sure tenant
 name is correct in top-left of the page) and set the default directory to
 `Username-Password-Authentication`:
@@ -128,6 +130,19 @@ If you have changed the name of your default directory (i.e. your tenant's
 default database name), you should replace `Username-Password-Authentication`
 with your database's name, as it's shown in the Auth0 UI. Click on 'databases'
 in the sidebar of the Auth0 dashboard to view your database(s).
+
+**OPTION B:** Add the `auth0Realm` variable to your `cypress.env.json` file if
+changing the default value in **OPTION A** is not possible. When using this
+approach, ensure that the users created for testing use the connection specified
+by `auth0Realm`.
+
+```json
+// cypress.env.json
+
+{
+  "auth0Realm": "alt-connection"
+}
+```
 
 **Step 6.3**: Add your cypress port URL (e.g. `http://localhost:3001`) to your
 Auth0 Application's 'Allowed Origins (CORS)' list:
@@ -487,13 +502,13 @@ Here are the Cypress environment variables (e.g. in `.env`):
 # .env
 
 # Auth0 Settings
-AUTH0_AUDIENCE="https://lyft.auth0.com/api/v2/",
-AUTH0_DOMAIN="lyft.auth0.com",
-AUTH0_CLIENT_ID="FNfof292fnNFwveldfg9222rf",
-AUTH0_CLIENT_SECRET="FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn",
-AUTH0_SECRET="DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D",
-AUTH0_SCOPE="openid profile email",
-AUTH0_SESSION_COOKIE_NAME="appSession",
+AUTH0_AUDIENCE="https://lyft.auth0.com/api/v2/"
+AUTH0_DOMAIN="lyft.auth0.com"
+AUTH0_CLIENT_ID="FNfof292fnNFwveldfg9222rf"
+AUTH0_CLIENT_SECRET="FNo3i9f2fbFOdFH8f2fhsooi496bw4uGDif3oDd9fmsS18dDn"
+AUTH0_SECRET="DB208FHFQJFNNA28F0N1F8SBNF8B20FBA0BXSD29SSJAGSL12D9922929D"
+AUTH0_SCOPE="openid profile email"
+AUTH0_SESSION_COOKIE_NAME="appSession"
 
 # cypress-nextjs-auth0 settings
 AUTH0_LOGOUT_URL="/api/auth/logout"
@@ -508,10 +523,10 @@ AUTH0_RETURN_TO_URL="/"
 # AUTH0_COOKIE_TRANSIENT=
 
 # Test Case Settings
-AUTH0_USERNAME="testuser@lyft.com",
-AUTH0_PASSWORD="mysupersecurepassword",
+AUTH0_USERNAME="testuser@lyft.com"
+AUTH0_PASSWORD="mysupersecurepassword"
 AUTH0_USERNAMEALT="testuser@lyft.com"
-AUTH0_PASSWORDALT="anothersupersecurepassword",
+AUTH0_PASSWORDALT="anothersupersecurepassword"
 ```
 
 Here are the Next.js app variables (e.g. in `cypress/dummy/.env`).
