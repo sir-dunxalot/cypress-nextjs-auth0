@@ -117,7 +117,9 @@ Grant Type:
 
 ![auth0-grant-types](https://user-images.githubusercontent.com/4495352/83317105-6fed3780-a1f8-11ea-8d86-192e7e25f84b.jpg)
 
-**Step 6.2**: Go to your
+**Step 6.2**: 
+
+**OPTION A:** Go to your
 [Auth0 tenant's settings](https://manage.auth0.com/#/tenant) (make sure tenant
 name is correct in top-left of the page) and set the default directory to
 `Username-Password-Authentication`:
@@ -128,6 +130,15 @@ If you have changed the name of your default directory (i.e. your tenant's
 default database name), you should replace `Username-Password-Authentication`
 with your database's name, as it's shown in the Auth0 UI. Click on 'databases'
 in the sidebar of the Auth0 dashboard to view your database(s).
+
+**OPTION B:** Add the `auth0Realm` variable to your `cypress.env.json` file if changing the default value in **OPTION A** is not possible. When using this approach, ensure that the users created for testing use the connection specified by `auth0Realm`.
+```json
+// cypress.env.json
+
+{
+  "auth0Realm": "alt-connection"
+}
+```
 
 **Step 6.3**: Add your cypress port URL (e.g. `http://localhost:3001`) to your
 Auth0 Application's 'Allowed Origins (CORS)' list:
